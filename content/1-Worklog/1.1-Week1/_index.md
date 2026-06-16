@@ -106,7 +106,7 @@ pre: " <b> 1.1. </b> "
 **Lab01-04 — Account Verification Support:**
 
 - Practiced contacting AWS Support for account verification when necessary.
-- ![Proof: Support case creation success screen](/images/1-Worklog/1.1-Week1/support-case-success.png)
+- ![Proof: Support case creation success screen]()
 
 **Lab07 — AWS Budgets Practice:**
 

@@ -107,7 +107,7 @@ pre: " <b> 1.1. </b> "
 **Lab01-04 — Hỗ trợ xác thực tài khoản:**
 
 - Thực hành liên hệ AWS Support để xác thực tài khoản khi cần.
-- ![Ảnh minh chứng: màn hình tạo support case thành công](/images/1-Worklog/1.1-Week1/support-case-success.png)
+- ![Ảnh minh chứng: màn hình tạo support case thành công]()
 
 **Lab07 — Thực hành AWS Budgets:**
 
