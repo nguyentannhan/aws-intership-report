@@ -90,18 +90,18 @@ pre: " <b> 1.1. </b> "
 - Accessed [aws.amazon.com/free](https://aws.amazon.com/free) and created a new account.
 - Selected **Paid Plan** for full service access.
 - Received $100 credit automatically after successful creation.
-- ![Proof: AWS Console screen after first login](/images/1-Worklog/1.1-Week1/aws-billing-100-credit.png)
+- ![Proof: AWS Console screen after first login](images/1-Worklog/1.1-Week1/aws-billing-100-credit.png)
 
 **Lab01-02 — Set up Virtual MFA Device:**
 
 - Activated MFA for the root account using an Authenticator app.
-- ![Proof: MFA activation confirmation screen](/images/1-Worklog/1.1-Week1/mfa-activated.png)
+- ![Proof: MFA activation confirmation screen]()
 
 **Lab01-03 — Create Admin Group and Admin User:**
 
 - Created IAM Group `AdminGroup` with `AdministratorAccess` policy.
 - Created IAM User and assigned it to the group.
-- ![Proof: List of IAM Users and Groups in Console](/images/1-Worklog/1.1-Week1/iam-users-groups-console.png)
+- ![Proof: List of IAM Users and Groups in Console](images/1-Worklog/1.1-Week1/iam-users-groups-console.png)
 
 **Lab01-04 — Account Verification Support:**
 

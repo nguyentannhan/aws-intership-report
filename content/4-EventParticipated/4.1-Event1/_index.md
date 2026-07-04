@@ -156,7 +156,7 @@ After attending the workshop, I gained several important lessons:
 
 ## Event Evidence Images
 
-- ![Event Participation Evidence Image](</images/4-EventParticipated/Event1/event1(0).jpg>)
-- ![Event Participation Evidence Image](</images/4-EventParticipated/Event1/event1(1).jpg>)
+- ![Event Participation Evidence Image](<images/4-EventParticipated/Event1/event1(0).jpg>)
+- ![Event Participation Evidence Image](<images/4-EventParticipated/Event1/event1(1).jpg>)
 
 >Overall, **FCAJ Community Day** was more than a technical workshop. It helped me strengthen my learning mindset, understand how to use AI responsibly, and prepare myself better for a future career as a technology professional.

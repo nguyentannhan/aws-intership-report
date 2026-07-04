@@ -141,6 +141,6 @@ Sau sự kiện, tôi rút ra một số bài học quan trọng:
 
 ## 8. Một số hình ảnh tham gia sự kiện
 
-![Ảnh minh chứng: tham gia event](</images/4-EventParticipated/Event3/event3(0).jpg>)
+![Ảnh minh chứng: tham gia event](<images/4-EventParticipated/Event3/event3(0).jpg>)
 
 >Tóm lại, **FCAJ Community Day - June 2026 Edition** đã mang đến cho tôi nhiều góc nhìn thực tế và giá trị về Cloud, DevOps, Data Analytics và tư duy nghề nghiệp. Sự kiện không chỉ bổ sung kiến thức cho báo cáo thực tập mà còn giúp tôi định hình rõ hơn con đường trở thành một kỹ sư công nghệ có nền tảng vững, làm việc có trách nhiệm và hướng đến chuẩn mực quốc tế.

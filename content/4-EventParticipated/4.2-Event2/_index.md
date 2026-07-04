@@ -157,6 +157,6 @@ After the event, I gained several important lessons:
 
 ## 8. Event Participation Images
 
-![Event Participation Evidence Image](</images/4-EventParticipated/Event2/event2(0).jpg>)
+![Event Participation Evidence Image](<images/4-EventParticipated/Event2/event2(0).jpg>)
 
 > In summary, **FCAJ Community Day - May 2026 Edition** provided me with valuable knowledge about AI, Prompt Engineering, Multi-Agent systems, Cloud, security, and career mindset. The event helped me understand that in the AI era, engineers do not only need to know how to use new tools. They also need system thinking, product responsibility, and the ability to create real value for enterprises.

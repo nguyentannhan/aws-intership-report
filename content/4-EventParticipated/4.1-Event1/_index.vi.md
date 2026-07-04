@@ -145,7 +145,7 @@ Sau khi tham gia sự kiện, tôi rút ra một số bài học quan trọng:
 
 ## 8. Một số hình ảnh tham gia sự kiện
 
-- ![Ảnh minh chứng: tham gia event](</images/4-EventParticipated/Event1/event1(0).jpg>)
-- ![Ảnh minh chứng: tham gia event](</images/4-EventParticipated/Event1/event1(1).jpg>)
+- ![Ảnh minh chứng: tham gia event](<images/4-EventParticipated/Event1/event1(0).jpg>)
+- ![Ảnh minh chứng: tham gia event](<images/4-EventParticipated/Event1/event1(1).jpg>)
 
 >Tổng kết lại, **FCAJ Community Day** là một sự kiện mang lại nhiều giá trị cả về kiến thức kỹ thuật lẫn tư duy phát triển cá nhân. Sự kiện giúp tôi hiểu rõ hơn cách học hiệu quả, cách sử dụng AI có trách nhiệm và cách chuẩn bị tốt hơn cho hành trình trở thành một kỹ sư công nghệ trong tương lai.

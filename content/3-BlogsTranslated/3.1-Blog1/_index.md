@@ -114,4 +114,4 @@ Gateway VPC Endpoint is a suitable solution when resources in a private subnet n
 In practice, when designing a cloud system, the choice between NAT Gateway and VPC Endpoint should depend on the specific connectivity requirements. If the system needs to access many external Internet services, NAT Gateway is still a necessary component. However, if the goal is only to access supported AWS services such as Amazon S3, VPC Endpoint is a simpler, safer, and more efficient choice.
 More importantly, the biggest lesson from this model is: cloud security does not only come from placing resources inside a private subnet, but also from how the traffic path is designed, how IAM permissions are assigned, and how data is controlled at each layer of the system.
 
-![Illustration](/images/3-BlogsTranslated/Blog1/blog1.jpg)
+![Illustration](images/3-BlogsTranslated/Blog1/blog1.jpg)

@@ -113,4 +113,4 @@ Gateway VPC Endpoint là một giải pháp phù hợp khi cần cho tài nguyê
 Trong thực tế, khi thiết kế hệ thống cloud, việc lựa chọn giữa NAT Gateway và VPC Endpoint cần dựa trên nhu cầu kết nối cụ thể. Nếu hệ thống cần truy cập nhiều dịch vụ bên ngoài Internet, NAT Gateway vẫn là một thành phần cần thiết. Tuy nhiên, nếu mục tiêu chỉ là truy cập các dịch vụ AWS được hỗ trợ như Amazon S3, VPC Endpoint là một lựa chọn đơn giản, an toàn và hiệu quả hơn.
 Quan trọng hơn, bài học lớn nhất từ mô hình này là: bảo mật cloud không chỉ đến từ việc đặt tài nguyên trong private subnet, mà còn đến từ cách thiết kế đường đi của traffic, cách phân quyền IAM và cách kiểm soát dữ liệu ở từng lớp của hệ thống.
 
-![Ảnh minh họa](/images/3-BlogsTranslated/Blog1/blog1.jpg)
+![Ảnh minh họa](images/3-BlogsTranslated/Blog1/blog1.jpg)

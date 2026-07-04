@@ -141,6 +141,6 @@ After the event, I gained several important lessons:
 
 ## 8. Event Participation Images
 
-![Event Participation Evidence Image](</images/4-EventParticipated/Event3/event3(0).jpg>)
+![Event Participation Evidence Image](<images/4-EventParticipated/Event3/event3(0).jpg>)
 
 > In summary, **FCAJ Community Day - June 2026 Edition** provided me with many practical and valuable perspectives on Cloud, DevOps, Data Analytics, and career mindset. The event not only supported my internship report but also helped me define more clearly my path toward becoming a technology engineer with strong foundations, professional responsibility, and an international-standard mindset.

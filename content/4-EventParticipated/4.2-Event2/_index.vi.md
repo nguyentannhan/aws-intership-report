@@ -157,6 +157,6 @@ Sau sự kiện, tôi rút ra một số bài học quan trọng:
 
 ## 8. Một số hình ảnh tham gia sự kiện
 
-![Ảnh minh chứng: tham gia event](</images/4-EventParticipated/Event2/event2(0).jpg>)
+![Ảnh minh chứng: tham gia event](<images/4-EventParticipated/Event2/event2(0).jpg>)
 
 >Tổng kết lại, **FCAJ Community Day - May 2026 Edition** đã mang lại cho tôi nhiều kiến thức giá trị về AI, Prompt Engineering, Multi-Agent, Cloud, bảo mật và tư duy nghề nghiệp. Sự kiện giúp tôi hiểu rằng trong thời đại AI, người kỹ sư không chỉ cần biết sử dụng công cụ mới mà còn phải có tư duy hệ thống, trách nhiệm với sản phẩm và khả năng tạo ra giá trị thực tế cho doanh nghiệp.

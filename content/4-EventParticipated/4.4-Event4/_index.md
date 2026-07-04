@@ -120,6 +120,6 @@ The event atmosphere was very open and lively. Direct Q&A activities, discussion
 
 #### 8. Some Photos from the Event
 
-![Proof photo: event participation](</images/4-EventParticipated/Event4/event4(0).jpg>)
+![Proof photo: event participation](<images/4-EventParticipated/Event4/event4(0).jpg>)
 
 > In summary, the June Community Day session provided me with a lot of practical knowledge about Agentic Ops, Voice AI Agent, DevOps AI Agent, and AI security in enterprise environments. More importantly, the event helped me develop a clearer systems-thinking mindset, understand the role of AI in modern work, and gain more confidence in my future career direction.
