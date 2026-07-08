@@ -1,162 +1,125 @@
 ---
 title: "Event 1"
-date: 2026-05-09
+date: 2026-06-27
 weight: 1
 chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-# "FCAJ Community Day" Workshop Report
+# Reflection Report on “FCAJ Community Day - June 2026 Edition”
 
-## Event Purpose
+### 1. Objectives of the Event
 
-The **FCAJ Community Day** workshop was designed to help IT students develop a stronger learning mindset, improve their ability to work with AI tools, and better understand the expectations of the technology industry.
-The main objectives of the event included:
-- Introducing scientific approaches to building motivation and maintaining discipline in self-learning through Dopamine management.
-- Sharing advanced Prompt Engineering techniques to improve productivity when working with Large Language Models.
-- Providing practical career guidance for third-year and fourth-year IT students based on real recruitment expectations.
-- Presenting the BMX/BMM software development method as a way to apply AI Agents more effectively while reducing hallucination risks.
+- To help participants gain a clearer understanding of career development paths in the Cloud/DevOps field, especially in the context of AI creating many changes in the labor market.
+- To share how to build an AI-powered voice assistant system that can process Vietnamese and be applied to real-world problems in the Banking industry.
+- To introduce an approach to automating operational processes, monitoring, and infrastructure incident handling through a DevOps AI Agent.
+- To present how Amazon Q Business, the MCP protocol, and private connection models can be applied to improve human resource management efficiency while ensuring the security of internal data.
 
-## Speakers
+### 2. List of Speakers
 
-The workshop featured several speakers with practical experience in technology, software development, and career mentoring:
-- **Mr. Long**: Shared methods for building learning habits through brain-hacking techniques.
-- **Mr. Thinh**: Presented the topic of Ultimate Prompt Engineering.
-- **Mr. Khang**: Solutions Architect at Cloud Kinetics, with experience in recruitment and career orientation for technology students.
-- **Ms. Thao**: Software Developer at Vietnam International Bank (VIB).
+- **Mr. Steve Trần** - Founder of Cloud Thinker, former Solution Architect at Amazon/AWS Vietnam.
+- **Mr. Hiếu Nghị** - Cloud Specialist from Renova Cloud.
+- **Mr. Kiệt** - Solution Engineer from Student Video Group.
+- **Mr. Trung** - Founder and CEO of R AI, who previously founded a technology startup in the United States that was later acquired by a Google subsidiary.
+- **Mr. Nguyên Nguyễn & Ms. Bảo** - Cloud Engineers from Cloud Kinetics.
+- **Mr. Trường (Owen) & Ms. Minh Anh** - Solution Architects from Noventic.
+- **Mr. Toàn Nguyễn** - AWS Security Builder.
 
-## Main Highlights
+### 3. Key Highlights of the Event
 
-### Brain-Hacking Method for Building Learning Motivation
+#### 3.1. Career Path Orientation and the “Agentic Ops” Foundation for Cloud Infrastructure
 
-One of the most interesting topics in the workshop was how to make learning more engaging by understanding how the brain works. The speaker explained that Dopamine is not only released when a reward is received. Instead, it becomes especially active when the brain expects a reward to happen soon.
-This explains why social media platforms such as TikTok can keep users engaged for a long time. Users continue scrolling because they are curious about what will appear next. The same mechanism can be applied to learning if the learning process is designed to create curiosity, progress, and satisfaction.
-The learning cycle can be summarized as:
-**Curiosity → Experimentation → Discovery → Satisfaction**
-Some practical techniques were introduced:
-- **Loss Aversion**: Learners can use a physical calendar or an application to track daily study streaks. Once a long streak is built, the fear of losing it encourages learners to continue studying, even if only for a short time each day.
-- **Breaking down large goals**: Instead of setting a difficult goal such as studying AWS for many hours, learners should divide the goal into smaller tasks, such as learning one AWS service in 10–20 minutes.
-- **The 2-Minute Rule**: If a task can be started or completed within two minutes, such as opening a document or reading one page, it should be done immediately to reduce procrastination.
-- **Gamification and feedback**: Learners can create a personal reward system using XP points, ranks, progress levels, or random rewards after each study session to make learning feel more motivating.
+- **Changes in the recruitment market**: The job market for developers is undergoing a clear shift. Many businesses, from large corporations to startups, are reducing recruitment for general positions and prioritizing candidates with experience who know how to leverage AI to accelerate product development and code deployment.
+- **The role of humans in Production infrastructure**: For Cloud Infrastructure systems, especially in Production environments, every minute of downtime can cause major financial and reputational damage to a business. Therefore, AI cannot completely replace humans but mainly acts as a supporting tool. Businesses still need highly skilled engineers to make accurate decisions in critical incident situations.
+- **Cloud Thinker’s Agentic Platform solution**: Cloud Thinker introduced its direction of building an Agent operating system that can understand system architecture from the source code layer to the business logic layer. This platform supports engineers in reading logs, analyzing incident root causes in a short time, automatically reviewing source code, evaluating errors, and optimizing Cloud costs based on the FinOps approach. A notable point is that the system is not fixed to a single infrastructure provider.
 
-### Ultimate Prompt Engineering
+#### 3.2. Voice AI Agent Architecture for the Vietnamese Market
 
-The Prompt Engineering session showed that working effectively with AI requires more than simply asking a question. A good prompt should be clear, structured, and specific so that the AI can understand the task correctly.
-A strong prompt usually contains seven important elements:
-1. **Role**: Defines the role that the AI should take.
-2. **Instruction**: Explains what the AI needs to do.
-3. **Context**: Provides background information.
-4. **Input Data**: Gives the information that the AI should use.
-5. **Output Format**: Specifies how the answer should be presented.
-6. **Examples**: Provides sample answers or patterns.
-7. **Constraints**: Sets limits, rules, or special requirements.
-The speaker also discussed **tokens**, which are the units that Large Language Models use to process text. A key point is that Vietnamese text often consumes more tokens than English text, which can increase API costs when AI systems are used in business environments.
-Several advanced reasoning techniques were also introduced:
-- **Chain of Thought (CoT)**: Guides the AI to reason step by step before producing an answer.
-- **Tree of Thought (ToT)**: Allows the AI to explore multiple possible reasoning paths and compare them before choosing the best solution.
-- **Self-Consistency**: Generates several independent reasoning results and selects the answer that appears most consistently.
-The session also included a case study about the **Prompt Optimizer Project**. This project uses a serverless AWS architecture to automatically optimize prompts. The system combines services such as CloudFront, S3, Amazon Cognito, API Gateway, AWS Lambda, DynamoDB, and Amazon Bedrock to build a scalable and secure AI-based solution.
+- **Challenges of the Vietnamese language**: Modern Speech-to-Speech models in the world currently support English better than Vietnamese. Since Vietnamese has many characteristics related to tones, regional accents, and communication context, directly applying international models to the Vietnamese market still has many limitations.
+- **Three-layer Voice Agent model: STT → LLM → TTS**: To deploy a call center Voice Bot for major banks such as VPBank or VIB, a suitable solution is to divide the processing workflow into three main layers:
+  1. *Speech-to-Text (STT)*: The system receives real-time audio and converts speech into streaming text.
+  2. *Large Language Model (LLM)*: After being converted, the text is sent to a large language model to process business logic, understand customer requests, and generate responses in text form. This layer helps businesses control response content, reduce the risk of AI giving answers in the wrong context, and support system tool calls such as locking bank cards, verifying citizen ID information, or checking customer information.
+  3. *Text-to-Speech (TTS)*: The text response is then converted into natural speech. The system can handle gender-based forms of address such as “Anh/Chị” and apply turn-taking mechanisms to handle situations where users speak intermittently or interrupt during the conversation.
 
-### Career Orientation for IT Students
+#### 3.3. Automating Production Incident Handling with a DevOps AI Agent
 
-Another important part of the workshop focused on career preparation for IT students. The speakers emphasized that AI can greatly improve productivity, but only when users understand what they are doing.
-If students only copy AI-generated results without understanding the logic behind them, AI may actually make their skills weaker. However, if students know how to think critically, verify the output, and ask the right questions, AI can become a powerful tool that increases their productivity.
-Some key career lessons included:
-- **Focus on “Why” instead of only “What”**: Students should not only ask how to complete a task, but also why a specific architecture, database, or technology is chosen.
-- **Do not depend blindly on AI**: A perfect-looking answer generated by AI is not valuable if the student cannot explain it.
-- **Integrity in work**: A responsible engineer does not only complete the basic requirements. They also think about edge cases, risks, and possible errors even when no one is watching.
-- **Long-term career vision**: Fresh graduates should not focus only on salary. They should also consider experience, knowledge, professional network, and future growth opportunities.
-The speakers also introduced the three-circle career model. A suitable career path should balance:
-- What the person enjoys doing.
-- What the company or market needs.
-- What benefits the person receives from the work.
-In addition, the workshop explained five common factors used by companies to evaluate candidates:
-- **Attitude**
-- **Education**
-- **Experience**
-- **Exposure**
-- **Talent**
-Among these factors, attitude is especially important for fresher-level candidates because companies value willingness to learn, responsibility, and honesty.
+- **Difficulties in operating large systems**: When a system encounters incidents such as application crashes, increased latency, or abnormal service responses, DevOps teams often need a lot of time to investigate. This is because logs, traces, and monitoring data are usually scattered across multiple places, making the process of identifying errors and restoring the system take longer.
+- **The four-step workflow of the DevOps Agent**:
+  - *Step 1 - Incident classification*: AI receives trigger signals from CloudWatch alerts, then automatically collects and groups logs related to the incident.
+  - *Step 2 - Root cause investigation*: Based on the system topology diagram that has been learned beforehand, AI proposes possible error hypotheses and performs analysis to identify the root cause.
+  - *Step 3 - Remediation proposal*: AI generates an incident-handling scenario in a safe direction. However, before execution in the Production environment, the proposed solution still requires human confirmation through a Human-in-the-loop mechanism to reduce risks.
+  - *Step 4 - Long-term improvement*: After the incident is resolved, the system continues to suggest optimization methods to prevent similar errors from recurring in the future.
+- **Operational cost**: The service is charged based on the actual runtime of the Agent. The shared cost is approximately **0.083 USD/second** for the entire process of computation, topology construction, and incident handling.
 
-### BMX/BMM Software Development Method with AI Agents
+#### 3.4. Applying Amazon Q Business and the MCP Protocol in Human Resource Management
 
-The workshop also introduced the BMX/BMM method, which is a structured approach for applying AI Agents in software development. Instead of putting all requirements into one long AI conversation, this method separates the development process into different roles, such as:
-- Project Manager
-- Architect
-- Product Owner
-- Scrum Master
-- Developer
-- Reviewer/QA
-This approach helps reduce hallucination, which happens when AI generates incorrect information or faulty code. When the context window becomes too large or the instructions are unclear, AI can easily lose focus. BMX/BMM solves this by breaking the Product Requirement Document and system architecture into smaller Epics and Stories.
-Each Story follows a controlled workflow:
-**Draft → Approved → Review → Done**
-The Developer Agent only works on Stories that have already been approved. After that, the Reviewer Agent and QA Agent check the output, identify issues, and continue the review process until the result meets the required quality.
-The main idea of this method is that developers do not only manage source code. They must first create clear, detailed, and structured documentation so that AI Agents can generate better and more reliable results.
+- **Problems in traditional recruitment processes**: HR departments often spend a lot of time reading and filtering CVs manually. This process can last from one to two months, may overlook suitable candidates, and sometimes the evaluation results can be influenced by personal judgment instead of clear data.
+- **Building an HR Assistant with Quick Desktop**: The speaker presented how to upload structured Markdown files into the system so that AI can automatically configure processing skills. The tool can perform OCR and deeply analyze CV data, including scanned files or images. After that, AI compares candidate information with the requirements in the JD to score and classify candidates into levels such as Strong, Good, or Low, while also supporting interview schedule synchronization and email drafting for candidates.
 
-## Key Takeaways
+#### 3.5. Private Security Solution and Secure MCP Server Connection
 
-### Design Thinking
+- **Risk of data leakage in Enterprise environments**: When AI Agents are connected to third-party platforms such as Gmail, Jira, GitHub, or Zalo through Public Endpoints, businesses may face many security risks such as Prompt Injection, Man-in-the-middle attacks, or internal data leakage.
+- **Secure internal connection architecture through VPC Connection**:
+  - The entire MCP Server is deployed inside the enterprise’s **Private Subnet**, limiting direct access from the public Internet environment.
+  - **VPC Connection** combined with an **Interface Endpoint** is used so that Amazon Q Business can privately query internal data without going through the public Internet.
+  - Traffic is distributed through an **Application Load Balancer (ALB)** combined with TLS certificates from AWS Certificate Manager (ACM) to encrypt data in transit.
+  - User authentication is handled through **Amazon Cognito**, helping control access permissions more securely.
+  - *Estimated cost*: This private infrastructure model costs around **250 - 350 USD/month**, including components such as Route 53 Resolver, ALB, EC2, and related services. This is a necessary cost to ensure that internal data flows are more strictly protected.
 
-After joining the workshop, I realized that learning technology should not be about trying to master everything at once. For example, AWS has hundreds of services, but students do not need to learn all of them immediately. It is more important to deeply understand the core services first and know how they can be combined in a real architecture.
-The workshop also helped me understand the importance of critical thinking when using AI. Instead of accepting AI answers immediately, I should question the reason behind each suggestion and evaluate whether it truly fits the problem.
+### 4. Knowledge Gained
 
-### Technical Knowledge
+#### 4.1. Design Thinking
 
-I learned how to build better prompts by using the seven essential prompt components. This structure can help improve the quality of AI responses in tasks such as requirement analysis, documentation writing, planning, and programming support.
-I also gained a better understanding of how token usage affects the operating cost of AI systems. In real projects, prompt length, language choice, and conversation history can all influence the cost of using LLM APIs.
-In addition, I learned how multiple AI Agents can work together in a software development workflow. By assigning each Agent a specific role and limiting its context, the system becomes easier to control and less likely to generate unrelated or incorrect outputs.
+- **Thinking about collaboration between AI and humans**: AI should be viewed as a tool that supports and amplifies human work capabilities rather than a solution that completely replaces humans. In particular, for tasks related to source code fixes or direct intervention in Production infrastructure, humans must still be the final reviewers.
+- **Zero Trust security mindset**: When deploying AI in sensitive fields such as Banking, Finance, or Healthcare, the most important factor is not only making the system work, but also ensuring security, privacy, and compliance with legal requirements.
 
-### Modern Development Strategy
+#### 4.2. Technical Architecture
 
-A major lesson from the event is the importance of **Document-Driven Development**. In the AI era, the value of a developer is not only in writing code manually, but also in describing problems clearly, creating accurate technical documents, and checking the quality of AI-generated outputs.
-The workshop also reminded me that career development is a long-term journey. Mistakes are not always negative. They can become valuable learning experiences if I reflect on them and improve continuously.
+- I gained a clear understanding of the **three-layer Voice Bot model**, including STT, LLM, and TTS, as well as the role of each layer in processing Vietnamese conversations.
+- I recognized the importance of building diverse training data, especially regional voice data, to improve the end-user experience in the Vietnamese market.
+- I understood how AI is granted permissions and isolated in its operating environment through the concept of **Agent Space** in the DevOps Agent ecosystem.
+- I learned how to design a **VPC Connection** model combined with an MCP Server to create a closed, secure data transmission path suitable for enterprise environments on AWS.
 
-## Practical Applications
+#### 4.3. Modernization Strategy
 
-The knowledge from this workshop can be applied to my study and future work in several ways:
-- **Improving daily prompt writing**: I will use the seven prompt components when working with ChatGPT, Gemini, or other AI tools to get more accurate and useful responses.
-- **Applying “Why” thinking to projects**: For each technical decision, I will ask why that solution is chosen, what alternatives exist, and what trade-offs need to be considered.
-- **Building a consistent self-learning habit**: I can use study streaks, the 2-minute rule, and small learning goals to maintain daily progress in learning new technologies.
-- **Experimenting with AI Agent workflows**: I can study the BMX/BMM method and try applying it to personal or group projects to manage tasks, documentation, and testing more effectively.
-- **Improving collaboration skills**: I should participate more actively in tech communities, workshops, and meetups to practice communication, presentation, and technical discussion.
+- **Modernizing processes through a platform-based approach**: Bringing AI Agents into large enterprises is not simply about adding a new tool. Businesses need to restructure a large part of their traditional operating processes and build a suitable transformation roadmap through Managed Services so that users can gradually become familiar with and apply the technology step by step.
 
-## Personal Experience at the Event
+### 5. Application to Study and Work
 
-For me, **FCAJ Community Day** was a valuable experience because it provided both technical knowledge and practical career advice. The event helped me understand not only how to use AI tools better, but also how to think and work more professionally in the technology field.
+- **Optimizing CVs for AI Filter systems**: When writing a CV, information should be presented clearly and structurally, while using technical keywords that closely match the requirements in the JD. This helps CVs become easier for automated AI screening systems to identify and evaluate accurately.
+- **Practicing with DevOps AI Agent**: The two-month free trial program of DevOps Agent on AWS Console can be used to experience configuration, topology mapping, and simulated incident analysis on small clusters.
+- **Learning more about the MCP protocol**: I can study how to build a basic MCP Server in a local environment to understand how AI tools can connect to personal or enterprise data in a controlled way.
+- **Focusing on foundational knowledge**: It is not advisable to rely entirely on automatic AI code generation tools. Instead, I should continue strengthening core knowledge such as Backend development, computer networking, JWT, security, Terraform, and Infrastructure as Code so that I can take control of the system when real incidents occur.
 
-### Learning from Experienced Speakers
+### 6. Personal Experience at the Event
 
-The sharing from Mr. Khang, Ms. Thao, and other speakers gave me a clearer view of how companies evaluate young candidates. I realized that GPA or a polished final result is not enough. What matters more is whether I truly understand my work and can explain the decisions behind it.
+Participating in the **“FCAJ Community Day - June 2026 Edition”** event at the office spaces on the 26th and 36th floors was a meaningful learning and networking experience. The event gave me a more practical perspective on how GenAI is being applied in large Enterprise environments, especially in fields that require high security and stability.
 
-### Exposure to Real Technical Examples
+#### 6.1. Learning from Experienced Speakers
 
-The serverless architecture demo of the Prompt Optimizer Project helped me understand how AWS services can work together in a real system. Services such as Amazon Bedrock, DynamoDB, Lambda, API Gateway, Cognito, S3, and CloudFront showed how a modern system can be designed to be scalable, secure, and flexible.
+I had the opportunity to listen to real-world sharing from founders, Cloud experts, and experienced engineers such as Mr. Steve Trần from Cloud Thinker and Mr. Trung from R AI. Their stories about career development journeys, especially the process of growing into a Solution Architect position at Amazon, gave me a lot of motivation for self-learning and future career orientation.
 
-The explanation of techniques such as Chain of Thought, Tree of Thought, and Self-Consistency also helped me see that using AI effectively requires method and structure. It is not just about entering a simple question and waiting for an answer.
+#### 6.2. Observing Real Technical Demonstrations
 
-### A New Perspective on AI
+One of the highlights of the event was the live demo sessions. I observed a Voice Agent system responding to Apple product information on the Bedrock Agent Core platform, as well as a DevOps Agent demo that automatically scanned and mapped more than 300 resource relationships in a system within about 15 minutes.
 
-After the workshop, I understood that AI should not replace human thinking. If used incorrectly, AI can make learners dependent and reduce their ability to solve problems independently.
+The flow diagram presentations also helped me better understand how language processing works in a banking environment, where accuracy, safety, and information control are extremely important.
 
-However, when used properly, AI becomes a powerful assistant. It can support brainstorming, documentation, programming, and analysis while humans still remain responsible for understanding, verifying, and making final decisions.
+#### 6.3. Accessing Modern Tools
 
-### Networking and Personal Growth
+Through the presentation about Amazon Quick Desktop, I understood more clearly how users without deep technical backgrounds can still make use of data and perform basic analysis tasks. This tool helps automate many repetitive tasks in the human resources department, from reading CVs and evaluating candidates to supporting interview scheduling.
 
-The event created an open environment where students could ask questions, exchange ideas, and learn from each other. This encouraged me to become more active in technology communities and to be less afraid of making mistakes.
+#### 6.4. Networking and Exchanging Ideas in the Community
 
-I also learned that asking questions, sharing ideas, and receiving feedback are important parts of personal and professional growth.
+The event atmosphere was very open and lively. Direct Q&A activities, discussions with speakers, and minigames helped participants connect with one another more easily. This was also a good opportunity for students to get closer to the community of engineers, experts, and people who are working in the industry.
 
-## Final Lessons
+#### 7. Key Takeaways
 
-After attending the workshop, I gained several important lessons:
-- Sustainable growth does not only come from talent. It comes from discipline, consistency, and a good learning environment.
-- AI will not completely replace software engineers, but engineers who understand core principles and know how to use AI effectively will have a strong advantage.
-- Integrity is essential in both study and work. A good engineer should think about edge cases, ask “Why”, and take responsibility for the quality of their work.
-- Career development should be viewed from a long-term perspective, focusing on knowledge, experience, network, and growth opportunities rather than only short-term income.
+- After the event, I realized that technology should not be pursued blindly. What matters more is understanding the business problem, understanding the real needs of the enterprise, and choosing the right technology to solve that problem.
+- In addition, every architectural solution involves trade-offs. No matter how modern a system is, it still needs to balance performance, latency, security, scalability, and operational cost.
 
-## Event Evidence Images
+#### 8. Some Photos from the Event
 
-- ![Event Participation Evidence Image](<images/4-EventParticipated/Event1/event1(0).jpg>)
-- ![Event Participation Evidence Image](<images/4-EventParticipated/Event1/event1(1).jpg>)
+![Proof photo: event participation](<images/4-EventParticipated/Event1/event1(0).jpg>)
 
->Overall, **FCAJ Community Day** was more than a technical workshop. It helped me strengthen my learning mindset, understand how to use AI responsibly, and prepare myself better for a future career as a technology professional.
+> In summary, the June Community Day session provided me with a lot of practical knowledge about Agentic Ops, Voice AI Agent, DevOps AI Agent, and AI security in enterprise environments. More importantly, the event helped me develop a clearer systems-thinking mindset, understand the role of AI in modern work, and gain more confidence in my future career direction.

@@ -18,13 +18,13 @@ pre: " <b> 1.1. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                                                                      |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------------------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                                                                                                                                                                                                                                                                                                                                                            | 20/04/2026   | 20/04/2026      | https://www.notion.so/Group-description-TP-HCM-347df829a730809a8f63d39505644917     |
-| 3   | - Module 01-01: Điện Toán Đám Mây Là Gì? <br> - Module 01-02: Điều Gì Tạo Nên Sự Khác Biệt Của AWS? <br> - Module 01-03: Bắt Đầu Hành Trình Lên Mây Như Thế Nào <br> - Module 01-04: Hạ Tầng Toàn Cầu Của AWS                                                                                                                                                                                                                                                                                                              | 21/04/2026   | 21/04/2026      | https://cloudjourney.awsstudygroup.com/                                             |
-| 4   | - Module 01-05: Công Cụ Quản Lý AWS Services <br> - Module 01-06: Tối Ưu Hóa Chi Phí Trên AWS và Làm Việc Với AWS Support <br> - Module 01-07: Thực Hành và Nghiên Cứu Bổ Sung <br> - **Thực hành:** <br>&emsp;+ Lab01-01: Tạo tài khoản AWS <br>&emsp;+ Lab01-02: Cài đặt Virtual MFA Device <br>&emsp;+ Lab01-03: Tạo admin group và admin user <br>&emsp;+ Lab01-04: Hỗ trợ xác thực tài khoản                                                                                                                          | 22/04/2026   | 22/04/2026      | https://000001.awsstudygroup.com/ <br> https://000002.awsstudygroup.com/                                            |                                        |
-| 5   | - **Thực hành Budget:** <br>&emsp;+ Lab07-01: Tạo Budget bằng Template <br>&emsp;+ Lab07-02: Tạo Cost Budget Tutorial <br>&emsp;+ Lab07-03: Tạo Usage Budget <br>&emsp;+ Lab07-04: Tạo Reservation Instance (RI) Budget <br>&emsp;+ Lab07-05: Tạo Savings Plans Budget <br>&emsp;+ Lab07-06: Dọn dẹp Budgets <br> | 23/04/2026   | 23/04/2026      | https://000001.awsstudygroup.com/                                            |
-| 6   | - Hoàn thành 5 nhiệm vụ nhận $200 credit: <br>&emsp;+ Launch EC2 Instance (+$20) <br>&emsp;+ Amazon Bedrock Playground (+$20) <br>&emsp;+ Set up AWS Budgets (+$20) <br>&emsp;+ Create Lambda Web App (+$20) <br>&emsp;+ Create RDS Database (+$20) <br> - Nghiên cứu : AWS Well-Architected Framework                                                                                                                                                                                                              | 24/04/2026   | 24/04/2026      | https://000001.awsstudygroup.com/ <br> https://docs.aws.amazon.com/wellarchitected/ |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu|
+| --- | --- | ---| --- | --- |
+| 2 | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập | 20/04/2026   | 20/04/2026      | https://www.notion.so/Group-description-TP-HCM-347df829a730809a8f63d39505644917     |
+| 3 | - Module 01-01: Điện Toán Đám Mây Là Gì? <br> - Module 01-02: Điều Gì Tạo Nên Sự Khác Biệt Của AWS? <br> - Module 01-03: Bắt Đầu Hành Trình Lên Mây Như Thế Nào <br> - Module 01-04: Hạ Tầng Toàn Cầu Của AWS| 21/04/2026   | 21/04/2026      | https://cloudjourney.awsstudygroup.com/                                             |
+| 4 | - Module 01-05: Công Cụ Quản Lý AWS Services <br> - Module 01-06: Tối Ưu Hóa Chi Phí Trên AWS và Làm Việc Với AWS Support <br> - Module 01-07: Thực Hành và Nghiên Cứu Bổ Sung <br> - **Thực hành:** <br>&emsp;+ Lab01-01: Tạo tài khoản AWS <br>&emsp;+ Lab01-02: Cài đặt Virtual MFA Device <br>&emsp;+ Lab01-03: Tạo admin group và admin user <br>&emsp;+ Lab01-04: Hỗ trợ xác thực tài khoản| 22/04/2026   | 22/04/2026      | https://000001.awsstudygroup.com/ <br> https://000002.awsstudygroup.com/                                            |                                        |
+| 5 | - **Thực hành Budget:** <br>&emsp;+ Lab07-01: Tạo Budget bằng Template <br>&emsp;+ Lab07-02: Tạo Cost Budget Tutorial <br>&emsp;+ Lab07-03: Tạo Usage Budget <br>&emsp;+ Lab07-04: Tạo Reservation Instance (RI) Budget <br>&emsp;+ Lab07-05: Tạo Savings Plans Budget <br>&emsp;+ Lab07-06: Dọn dẹp Budgets <br> | 23/04/2026   | 23/04/2026      | https://000001.awsstudygroup.com/|
+| 6 | - Hoàn thành 5 nhiệm vụ nhận $200 credit: <br>&emsp;+ Launch EC2 Instance (+$20) <br>&emsp;+ Amazon Bedrock Playground (+$20) <br>&emsp;+ Set up AWS Budgets (+$20) <br>&emsp;+ Create Lambda Web App (+$20) <br>&emsp;+ Create RDS Database (+$20) <br> - Nghiên cứu : AWS Well-Architected Framework | 24/04/2026   | 24/04/2026      | https://000001.awsstudygroup.com/ <br> https://docs.aws.amazon.com/wellarchitected/ |
 
 ---
 
@@ -96,7 +96,7 @@ pre: " <b> 1.1. </b> "
 **Lab01-02 — Cài đặt Virtual MFA Device:**
 
 - Kích hoạt MFA cho tài khoản root bằng ứng dụng Authenticator.
-- ![Ảnh minh chứng: màn hình xác nhận MFA đã được kích hoạt thành công]()
+- ![Ảnh minh chứng: màn hình xác nhận MFA đã được kích hoạt thành công](images/1-Worklog/1.1-Week1/mfa-activated.png)
 
 **Lab01-03 — Tạo admin group và admin user:**
 
@@ -107,7 +107,7 @@ pre: " <b> 1.1. </b> "
 **Lab01-04 — Hỗ trợ xác thực tài khoản:**
 
 - Thực hành liên hệ AWS Support để xác thực tài khoản khi cần.
-- ![Ảnh minh chứng: màn hình tạo support case thành công]()
+- ![Ảnh minh chứng: màn hình tạo support case thành công](images/1-Worklog/1.1-Week1/support-case-success.png)
 
 **Lab07 — Thực hành AWS Budgets:**
 
@@ -117,37 +117,47 @@ pre: " <b> 1.1. </b> "
 - Lab07-04: Tạo RI Budget để theo dõi Reserved Instance.
 - Lab07-05: Tạo Savings Plans Budget.
 - Lab07-06: Xóa toàn bộ Budgets sau khi thực hành (clean up).
-- 📸 _Ảnh minh chứng: danh sách các Budgets đã tạo trong AWS Budgets Console._
 
 **5 nhiệm vụ nhận $200 credit:**
 
 - **Task 1 — Launch EC2 Instance (+$20):**
   - Tạo EC2 instance tên `Test Instance`, chọn AMI, cấu hình Security Group.
+   ![Ảnh minh chứng: Tạo EC2 instance Test Instance](images/1-Worklog/1.1-Week1/Create_server_EC2.png)
   - Tạo key pair `first-kp` (RSA, .pem).
+   ![Ảnh minh chứng: Tạo key pair first-kp](images/1-Worklog/1.1-Week1/Make_Pair_Key.png)
   - Terminate instance sau khi hoàn thành (clean up).
-  - 📸 _Ảnh minh chứng: EC2 instance ở trạng thái running._
+   ![Ảnh minh chứng: Terminate EC2 instance sau khi hoàn thành](images/1-Worklog/1.1-Week1/Delete_server.png)
+  - Hoàn thành nhiệm vụ đầu tiên
+   ![Ảnh minh chứng: Hoàn thành nhiệm vụ đầu](images/1-Worklog/1.1-Week1/Finish_First_Mission.png)
 
 - **Task 2 — Amazon Bedrock Playground (+$20):**
   - Truy cập Bedrock Console, chọn model **Claude 3 Haiku**.
   - Gửi use case details và chạy thử prompt.
-  - 📸 _Ảnh minh chứng: kết quả response từ Bedrock Playground._
+   ![Ảnh minh chứng: Truy cập Bedrock Console, chọn model Claude 3 Haiku](images/1-Worklog/1.1-Week1/Choose_Claude3_Haiku.png)
+  - Hoàn thành nhiệm vụ hai
+   ![Ảnh minh chứng: Hoàn thành nhiệm vụ 2](images/1-Worklog/1.1-Week1/Complete_Second_Mission.png)
 
 - **Task 3 — Set up AWS Budgets (+$20):**
   - Tạo cost budget với cảnh báo qua email.
-  - 📸 _Ảnh minh chứng: Budget đã tạo thành công._
+   ![Ảnh minh chứng: Tạo budget thành công](images/1-Worklog/1.1-Week1/Create_Budget.png)
+  - Hoàn thành nhiệm vụ ba
+  ![Ảnh minh chứng: Hoàn thành nhiệm vụ 3](images/1-Worklog/1.1-Week1/Finish_Third_Mission.png)
 
 - **Task 4 — Create Lambda Web App (+$20):**
   - Tạo Lambda function `http-function-url-tutorial` từ blueprint.
+   ![Ảnh minh chứng: Tạo Lambda function ](images/1-Worklog/1.1-Week1/Create_Lambda_function.png)
   - Delete function sau khi hoàn thành (clean up).
-  - 📸 _Ảnh minh chứng: Lambda function đã tạo thành công._
+   ![Ảnh minh chứng: Xóa Lambda function](images/1-Worklog/1.1-Week1/Delete_Lambda_function.png)
+  - Hoàn thành nhiệm vụ bốn.
+   ![Ảnh minh chứng: Hoàn thành nhiệm vụ 4](images/1-Worklog/1.1-Week1/Finish_Fourth_Mission.png)
 
 - **Task 5 — Create RDS Database (+$20):**
   - Tạo Aurora (PostgreSQL Compatible) database bằng Easy Create.
+   ![Ảnh minh chứng: Tạo Aurora](images/1-Worklog/1.1-Week1/Created_Aurora_database.png)
   - Xóa DB instance và cluster sau khi hoàn thành (clean up).
-  - 📸 _Ảnh minh chứng: RDS database ở trạng thái Available._
-
-- 📸 _Ảnh minh chứng tổng: AWS Billing Console hiển thị đủ $200 credit._
-
+   ![Ảnh minh chứng: Xóa DB instance và cluster sau khi hoàn thành](images/1-Worklog/1.1-Week1/Delete_DB.png)
+  - Hoàn thành nhiệm vụ năm.
+   ![Ảnh minh chứng: Hoàn thành nhiệm vụ 5](images/1-Worklog/1.1-Week1/Finish_Fifth_Mission.png)
 ---
 
 #### Khó khăn và cách giải quyết

@@ -1,126 +1,67 @@
 ---
 title: "Blog 2"
-date: 2024-01-01
-weight: 1
+date: 2026-07-06
+weight: 2
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
+# Amazon CloudFront – Optimizing Content Delivery from Edge to Origin
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+When building a website or web application, one common issue is that page loading speed may not be consistent for users from different geographic regions. If every request is sent directly to the origin server, the system can easily experience higher latency, increased resource usage, and a higher risk of overload when traffic grows rapidly.
+This is where **Amazon CloudFront** becomes useful.
+**CloudFront** is AWS’s CDN (Content Delivery Network) service that helps distribute content through a global network of edge locations. Instead of always requiring users to access the origin directly, such as Amazon S3, EC2, Application Load Balancer, or a backend server, CloudFront brings content closer to users. As a result, response time is improved, and the origin system can significantly reduce its workload.
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+## Key Points to Know About CloudFront
 
----
+* Helps speed up content delivery, such as images, videos, static files, static websites, or APIs.
+* Content can be temporarily stored in cache at edge locations, allowing users to access it faster in later requests.
+* Reduces pressure on the origin because not every request needs to be sent directly to the origin server.
+* Supports HTTPS, helping secure data transmission between users and CloudFront.
+* Can integrate effectively with **AWS WAF** to improve application protection against abnormal requests or common web attacks.
+* Supports many types of origins, such as Amazon S3, EC2, Load Balancer, or servers outside AWS infrastructure.
+* Allows flexible Cache Behavior configuration, making it easier to control which content should be cached longer and which content needs to be updated more frequently.
 
-## Architecture Guidance
+## Architecture and Operating Model
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
+Imagine an e-commerce website that contains a large number of product images. If users from different regions all load images directly from S3 or a backend server, the response speed may become slower, and the origin will have to process many requests at the same time.
+When CloudFront is deployed in front of the origin, product images can be cached at the edge location closest to the user. In later visits, CloudFront can respond with the content directly from the edge location without sending the request back to the origin. This approach helps the website load faster, reduces latency, and clearly improves the user experience.
 
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
+**Basic data flow model:**
 
-**The solution architecture is now as follows:**
+> *User → CloudFront Edge Location → Origin*
 
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
+In this model, the **Origin** can be an Amazon S3 bucket, EC2 Instance, Application Load Balancer, Backend API, or a server outside AWS.
+When a user sends a request, CloudFront checks whether the content already exists in the cache:
+* **If it exists (Cache Hit):** CloudFront returns the content directly from the edge location.
+* **If it does not exist (Cache Miss):** CloudFront retrieves the data from the origin, returns it to the user, and stores a copy to serve future requests.
 
----
+## Modern Application Use Cases
 
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
+CloudFront is not only suitable for delivering static content, but is also widely used in many modern architectures, as shown below:
+| System Type / Architecture | Typical Application Role |
+| --- | --- |
+| **Static Website** | Quickly distributes websites hosted entirely on Amazon S3. |
+| **Modern Web App** | Optimizes systems where the frontend is deployed separately and the backend API operates independently. |
+| **E-commerce** | Distributes and caches a large number of product images to reduce server load. |
+| **Media System** | Supports stable delivery of large files, videos, or documents. |
+| **API Services** | Reduces network latency when providing API data to users in different regions. |
+| **System Security** | Adds an additional protection layer in front of the origin when combined with AWS WAF. |
 
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+## Basic Hands-on Flow
 
----
+To get familiar with CloudFront and deploy it yourself, you can follow these basic steps:
+* Create an Amazon S3 bucket or prepare a backend server to use as the origin.
+* Upload static content such as HTML, CSS, JavaScript files, or images to the origin.
+* Create a CloudFront Distribution in the AWS Console.
+* Configure the origin to point to the prepared S3 bucket or backend server.
+* Enable HTTPS if the application needs secure access.
+* Customize Cache Behavior based on each specific type of content.
+* Access the domain provided by CloudFront to test the deployment result.
+* Evaluate page loading speed and check whether the content has been cached successfully.
+![Illustration](images/3-BlogsTranslated/Blog2/blog2(0).jpg)
 
-## Technology Choices and Communication Scope
+## Conclusion
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
-
----
-
-## The Pub/Sub Hub
-
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
-
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
-
----
-
-## Core Microservice
-
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
-
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
-
----
-
-## Front Door Microservice
-
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
-
----
-
-## Staging ER7 Microservice
-
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
-
----
-
-## New Features in the Solution
-
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+**Amazon CloudFront** is a very important component in modern cloud architectures, especially for systems that need to serve users across different geographic regions. This service not only helps accelerate content delivery but also reduces load on the origin, improves system stability, and strengthens security.
+A notable advantage of CloudFront is that you can start with very simple use cases, such as delivering a few images from S3, and then gradually expand to serve static websites, APIs, video streaming, or more complex production systems. If your application needs to be faster, more stable, and more optimized, CloudFront is a solution worth considering.

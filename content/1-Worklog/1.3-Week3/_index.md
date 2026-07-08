@@ -16,8 +16,6 @@ pre: " <b> 1.3. </b> "
 - Practice cost governance and permission control using IAM Policies.
 - Clean up resources after completing the lab to avoid unnecessary charges.
 
----
-
 ### Tasks Planned for This Week:
 
 | Day | Tasks | Start Date | Completion Date | Reference |
@@ -29,8 +27,6 @@ pre: " <b> 1.3. </b> "
 | Friday | - Module 5.1: Modify EC2 Instance Type <br> - Module 5.2: Create and Manage EBS Snapshots <br> - Module 5.3: Create Custom AMI <br> - Module 5.4: Launch Instance from Custom AMI <br> - Module 5.5 - 5.7: Recover access and Remote Desktop to Ubuntu | 15/05/2026 | 15/05/2026 | https://000004.awsstudygroup.com/ |
 | Saturday | - Module 6: Deploy AWS User Management Application on Amazon Linux <br> - Install LAMP Server, configure database, phpMyAdmin, Node.js, and deploy the application | 16/05/2026 | 16/05/2026 | https://000004.awsstudygroup.com/ |
 | Sunday | - Module 7: Deploy Node.js Application on Windows EC2 <br> - Module 8: Cost & Usage Governance with IAM <br> - Module 9: Clean up resources | 17/05/2026 | 17/05/2026 | https://000004.awsstudygroup.com/ |
-
----
 
 ### Week 3 Achievements:
 
@@ -83,8 +79,6 @@ pre: " <b> 1.3. </b> "
   - IP conditions
   - Time-based conditions
 - Learned the importance of governance in cloud environments.
-
----
 
 #### Hands-on Practice
 
@@ -155,8 +149,6 @@ pre: " <b> 1.3. </b> "
 - Removed unnecessary Security Groups and networking resources.
 - Checked Billing Dashboard to verify no abnormal charges.
 - 📸 _Evidence: All resources cleaned up successfully._
-
----
 
 #### Difficulties and Solutions
 

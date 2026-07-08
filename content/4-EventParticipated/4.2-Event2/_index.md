@@ -1,162 +1,146 @@
 ---
 title: "Event 2"
-date: 2026-05-23
+date: 2026-06-13
 weight: 2
 chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-# Event Summary: “FCAJ Community Day - May 2026 Edition”
+# "FCAJ Community Day - June 2026 Edition" Workshop Report
 
 ## 1. Event Objectives
 
-The **FCAJ Community Day - May 2026 Edition** was organized to update students and technology professionals on new trends in the IT industry, especially the strong impact of AI on the labor market, software development practices, and the way enterprises apply AI in real-world scenarios.
+The **FCAJ Community Day - June 2026 Edition** was organized to provide participants with practical perspectives on system architecture, data, DevOps, and career development in the modern technology industry. The event did not only focus on theoretical knowledge but also explored real-world implementation problems in enterprises and technology communities.
 The main objectives of the event included:
-- Providing an overview of the Vietnamese IT market during the rapid development of AI.
-- Sharing methods for building effective prompts, optimizing context, and controlling randomness when working with LLMs.
-- Introducing Amazon Q Business, QuickSight, and MCP Server in building data analytics assistants for enterprises.
-- Sharing practical experiences from Hackathon projects and how to design Enterprise-grade Multi-Agent systems.
-- Providing real-world perspectives on applying AI Agents in fields that require high security and reliability, such as finance and banking.
+- Introducing how to design a high-traffic system through the case study of building a URL Shortener service on AWS.
+- Sharing the role, skills, and mindset required for a **Data Analytics Engineer** working in multinational corporations.
+- Helping participants better understand the real responsibilities of a **DevOps Engineer**, including recruitment demand, salary ranges, and long-term foundational skills.
+- Inspiring participants about self-development, community contribution, and the mindset of doing the right work in the technology field.
 
 ## 2. List of Speakers
 
-The event featured several speakers from technology companies, banks, and the AWS community:
-- **Mr. Nguyen Gia Hung**: Solutions Architect at AWS Vietnam and Founder of FCAJ, sharing insights on the IT market direction in the AI era.
-- **Mr. Tinh Truong**: Platform Engineer at Gothamic X, presenting about context optimization and controlling the randomness of LLMs.
-- **Mr. Hai Anh**: Solutions Architect at Pacific Vietnam, sharing about Amazon Q Business and MCP.
-- **Mr. Nguyen Han Thinh**: DevOps Engineer, sharing about Flat-rate Pricing and advanced security layers of Amazon CloudFront.
-- **Uyen, Mach, and Ms. Thao**: The Hackathon winning team, sharing their 36-hour journey of developing the UTMorpho project.
-- **FinTech Speaker**: FinTech Solutions Advisor at VPBank, sharing about Multi-Agent architecture in banking operations.
+The event featured several speakers from different areas of the technology industry:
+- **Mr. Dinh Trung Kien**: Lead Developer at a Startup.
+- **Nguyen Minh Tho**: Student & Cloud Contributor.
+- **Mr. Dat Pham**: Data Analytics Engineer at a multinational corporation.
+- **Mr. Cuong Nguyen**: Process Engineer.
+- **Mr. Trong H. Truong**: DevOps Engineer at Endava Vietnam.
+- **Mr. Danh Hoang Hieu Nghi**: AI Engineer, AWS Community Builder & SBG Leader.
 
 ## 3. Key Highlights of the Event
 
-### 3.1. The IT Market and Career Opportunities in the AI Era
+### 3.1. Large-Scale URL Shortener Architecture on AWS
 
-One of the notable opening topics was the changing landscape of the IT market as AI becomes increasingly popular. The speaker introduced the “LED light paradox” as an example. When the cost of lighting decreased significantly thanks to LED lights, the demand for lighting did not decline but increased. Similarly, when AI makes coding faster and cheaper, the demand for software development may grow even stronger than before.
-AI does not make software disappear. Instead, it enables more people to create products. Even people who do not major in IT, such as doctors, lawyers, or business professionals, can use AI to participate in Hackathons or build MVPs. This creates many new opportunities, but it also brings major challenges related to software quality.
-A key issue emphasized in the session was that the market will likely see many products created quickly with AI but lacking stability, maintainability, or proper quality control. As a result, the demand for engineers who can fix bugs, optimize systems, refactor code, and build sustainable platforms will continue to increase.
-In particular, the role of **Platform Engineering** will become increasingly important. Large organizations need engineers who can build Internal Developer Platforms, automate infrastructure, and help software development teams work more efficiently.
-For the Vietnamese market, many major global technology companies are still opening Technical Hubs to take advantage of young talent. Therefore, Vietnamese engineers need to invest more in English skills, practical domain knowledge, the ability to design complete products, and the mindset to build production-ready systems instead of stopping at simple demo projects.
+One of the most notable sessions of the event focused on designing a scalable URL Shortener system. Although this problem may seem simple at first, it becomes much more complex when deployed at a large scale due to performance, security, latency, and traffic-handling challenges.
+In a traditional approach, the system usually generates a short code at the moment a user submits a request. This approach can lead to several limitations:
+- High latency because the system must process and check data in real time.
+- Risk of duplicate short codes if the code generation mechanism is not well controlled.
+- Difficulty scaling when traffic increases suddenly.
+- Possible bottlenecks or single points of failure in the system.
+To solve these problems, the speaker introduced the **Key Generation Service (KGS)** model. Instead of generating codes on demand, the system prepares a large number of short codes in advance.
+Some important points in the architecture included:
+- **Separating the read path and write path**: The read path and write path are designed independently so that each can be optimized based on its own traffic characteristics.
+- **Pre-generating codes instead of processing on demand**: Containers running on **Amazon ECS** generate short codes in advance and push them into a queue in **Amazon ElastiCache for Redis** using the `LPUSH key_queue` command.
+- **Fast code retrieval when a request arrives**: When a user wants to shorten a URL, the Spring Boot backend running on ECS only needs to use the `RPOP` command to retrieve an available code from Redis, then store the data in **Amazon DynamoDB** using that code as the primary key.
+- **Reducing duplicate-code risks**: Because the codes are generated and controlled beforehand, the system can reduce the risk of collisions during URL creation.
+- **Applying the Cache-aside Pattern**: When a user accesses a shortened link, the system first checks Redis. If the data is not found in the cache, it then queries DynamoDB.
+- **Protecting the system at the edge layer**: AWS WAF and Amazon CloudFront are placed closer to users to block harmful requests before they reach the core system.
+Through this session, I learned that even a functionally simple system can become highly complex when it needs to serve a large number of users. Therefore, system architecture must consider performance, security, scalability, and stability from the beginning.
 
-### 3.2. Context Optimization and LLM Randomness Control
+### 3.2. The Role and Growth Mindset of a Data Analytics Engineer
 
-The session on LLMs helped participants better understand how AI processes information and why the same question may sometimes produce different answers.
-A common mistake when using AI is putting too many unrelated topics into the same conversation. For example, one chat session may include questions about travel, CV improvement, and software coding at the same time. This constantly changes the Context Window, making it difficult for AI to stay focused and increasing the chance of incorrect or inconsistent responses.
-The speaker also explained that an LLM works as a **probabilistic engine**, meaning that the model predicts the next word based on probability. Each possible word has a score called a **logit**, and the model selects suitable words to generate the final answer.
-The **Temperature** parameter controls how creative or stable the output will be:
-- When Temperature is high, the answer may become more creative but also more variable.
-- When Temperature is low, especially when `Temperature = 0`, the model tends to choose the word with the highest probability to produce a more stable result.
-- For tasks that require accurate structures such as JSON, HTML, or code, a low Temperature should be used to reduce formatting errors.
-However, an important point is that even when `Temperature = 0`, results from Cloud APIs such as OpenAI or Amazon Bedrock can still be different across multiple runs. This can happen because of parallel GPU computation, floating-point rounding differences, and inference optimization techniques used by Cloud providers.
-Therefore, if an enterprise needs absolute control over model consistency, self-hosting the model on local infrastructure may be a more suitable option.
+The session about **Data Analytics Engineering** helped me understand more clearly how data-related work is performed in real enterprises. Depending on the business domain, the focus of data work can be very different.
+In technology or e-commerce companies, Data Analytics Engineers often build recurring reports, operational dashboards, and business metric tracking systems. The goal is to detect anomalies, identify root causes, and support different departments in improving performance.
+For example, in companies such as Kamereo, data can be used to monitor operational efficiency, analyze GMV, optimize orders, and support decision-making in the supply chain.
+Meanwhile, in manufacturing corporations such as Colgate-Palmolive, data may come from machines, production lines, IoT devices, or factory operation systems. In this environment, Data Analytics Engineers do not only create reports but also help discover opportunities to reduce production costs, optimize equipment performance, and improve manufacturing capacity.
+The speaker also emphasized four important skills for data professionals:
+- **Critical thinking**: Not only looking at surface-level numbers but also asking questions and checking the reasons behind them.
+- **Communication skills**: Being able to work with multiple departments to understand problems and explain analytical results.
+- **Data storytelling**: Turning data into clear and meaningful stories that support decision-making.
+- **Real-world problem-solving ability**: Analyzing data not just to create charts, but to generate actions and business value.
+One point that impressed me was the career growth path:
+`Follower` → `Learner` → `Problem Solver` → `System Thinker` → `Super Star`
+This path shows that technology professionals should not focus only on job titles. What matters more is the ability to solve problems, understand the overall system, and create real contributions to the organization.
+In addition, the **No-Blame Post-Mortem** culture was introduced as a valuable practice in large corporations. When a system incident occurs, the goal is not to find someone to blame. Instead, the team works together to analyze the cause, identify weaknesses in the process or architecture, and improve the system to prevent similar issues in the future.
 
-### 3.3. Amazon Q Business, QuickSight, and MCP in Data Analytics
+### 3.3. A Practical View of the DevOps Engineer Role
 
-Another notable topic was how Amazon Q Business and QuickSight can help business users analyze data more quickly. Instead of requiring users to have deep BI knowledge, the system can receive raw data such as Excel files, then automatically analyze and visualize the information into dashboards.
-This helps shorten the process from raw data to analytical reports. Users only need to ask questions or provide requests in natural language, and the system can support chart generation, trend summarization, and analytical insights.
-In addition, the speaker introduced **MCP - Model Context Protocol**. This protocol allows AI Agents to go beyond text-based responses and perform real actions. Through an MCP Server, AI can connect with various systems such as Jira, Confluence, Microsoft Cloud, Google Suite, or internal enterprise tools.
-As a result, an AI Agent can become a true “extended arm,” supporting tasks such as scheduling meetings, sending emails, searching documents, analyzing data, and interacting with enterprise systems.
-
-### 3.4. UTMorpho Case Study - A Hackathon Winning Project Built in 36 Hours
-
-The Hackathon winning team shared their journey of developing **UTMorpho** within 36 continuous hours. What made the project interesting was that the team did not choose an overly broad idea. Instead, they focused on solving a very practical pain point for developers when working with AI-generated interfaces.
-Normally, when AI creates an HTML/CSS interface, making a small change such as adjusting a button position, block size, or color may require the user to ask AI to regenerate almost the entire interface. This wastes time, consumes tokens, and may break the original structure.
-UTMorpho solves this problem by building a Multi-Agent system on AWS Serverless. The system consists of three main Agents:
-- **Vision Agent**: Reads images or sketches from the camera, then converts the information into a structured JSON format.
-- **Layout Agent**: Receives the JSON data and calculates the layout, size, CSS, and structural arrangement.
-- **Design Agent**: Converts the output from the Layout Agent into complete HTML/CSS source code in real time.
-A standout feature of UTMorpho is its visual editor, which allows developers to drag and drop components directly on the interface. After completion, the system can export a public HTML link so team members or colleagues can view and review the result together.
-The project showed that if a problem is divided properly, Multi-Agent systems can strongly support the process of turning ideas into products quickly while still maintaining control over the output.
-
-### 3.5. Multi-Agent Systems in Banking Operations
-
-The final part of the event presented a real-world problem in the finance and banking sector: credit evaluation for startups.
-In traditional loan approval models, businesses usually need to provide several years of financial reports and clear collateral. However, many startups have only operated for a few months, do not have long-term financial reports, and mainly own intellectual property, technology, or data. Therefore, they often find it difficult to access capital through traditional evaluation methods.
-The proposed solution was to design a **Multi-Agent** system that analyzes multiple non-traditional data sources. Each Agent takes on a specialized role:
-- **Credit Committee Agent**: Acts as the coordinator, assigns tasks, and summarizes the final report.
-- **Financial Analyst Agent**: Analyzes short-term financial reports, cash flow, and business operations.
-- **Market Research Agent**: Evaluates the market, competitors, market size, and industry trends.
-- **Team Evaluator Agent**: Assesses the founding team through technology profiles, social media, and public activities.
-- **Risk Assessor Agent**: Controls risk, filters input and output data, prevents sensitive information leakage, and protects against Prompt Injection.
-In the banking environment, security and compliance are extremely important. Therefore, the Risk Assessor Agent plays a key role in ensuring that the AI system does not exceed its allowed scope and does not expose sensitive information.
+The DevOps session helped me understand that DevOps is not only about writing CI/CD pipelines, configuring Docker and Kubernetes, or monitoring systems during incidents. In reality, the scope of DevOps work depends heavily on company size, infrastructure maturity, and the way engineering teams are organized.
+The speaker also shared an overview of the DevOps market in Vietnam during 2025–2026. DevOps Engineer and Cloud Engineer remain highly demanded roles, especially as more companies move their systems to the Cloud and need to automate their operation processes.
+DevOps salary levels are also considered competitive in the market. At the Junior level, the salary may range from **16 to 28 million VND per month**. At the Lead or Expert level, income can reach **65 to 100 million VND per month**, depending on skills, experience, and company scale.
+However, the most important lesson is not to chase every new tool. The speaker emphasized the idea that **“Fundamentals Stay.”** Tools may change over time, but foundational knowledge remains valuable.
+A strong DevOps Engineer needs to build solid foundations in areas such as:
+- Linux and operating systems.
+- Basic networking.
+- Programming languages such as Python or Golang.
+- System thinking.
+- The ability to ask “Why” before looking for “How.”
+I realized that if learners only memorize tool syntax, they may quickly fall behind when technologies change. In contrast, if they understand the fundamentals well, they can adapt to many different tools and working environments.
 
 ## 4. Knowledge Gained
 
 ### 4.1. Design Thinking
 
-After the event, I understood that when building a technology solution for an enterprise, the most important thing is not only whether the technology is new. More importantly, the solution must solve the right problem.
-A technology product needs to answer the following questions:
-- Who will use it?
-- What will they use it for?
-- Why do they need this solution?
-- When is the right time to deploy it?
-I also learned the concept of **Separation of Concerns** in Multi-Agent design. Each Agent should be responsible for one specific task, with a clear role and a limited scope. This helps avoid Context Window overload and makes the system easier to control.
+After the event, I learned that system design is not simply about combining different services together. Engineers need to understand traffic patterns, bottlenecks, user behavior, and operational risks in order to choose a suitable architecture.
+One important lesson was the concept of **Pre-computation**. Instead of making users wait while the system performs heavy tasks in real time, we can prepare the required resources or data in advance. This approach helps reduce latency and improve the user experience.
+I also gained a better understanding of the value of a **No-Blame** culture. When a system fails, the most important thing is not to criticize individuals, but to treat the incident as an opportunity to improve processes, architecture, and the operational capability of the whole team.
 
 ### 4.2. Technical Architecture
 
-From a technical perspective, I gained a better understanding of how to control the stability of LLMs through parameters such as `Temperature`, `Top P`, and `Repeat Penalty`. Depending on the desired output, users need to choose suitable configurations. For example, creative content may use a higher Temperature, while JSON or code should use a lower Temperature to maintain structural accuracy.
-I was also introduced to the network infrastructure behind CloudFront, AWS Backbone, and Points of Presence. CloudFront not only helps accelerate content delivery but also supports Origin Server protection against large-scale attacks such as DDoS or Syn Flood through request handling and Syn Proxy mechanisms.
-In addition, the event emphasized the role of **Terraform** and Infrastructure as Code. Instead of configuring resources manually through the AWS Console, engineers should manage infrastructure as code to make systems easier to reproduce, version, and deploy across different AWS Regions.
+From a technical perspective, I understood more clearly how to implement **Key Generation Service** in a URL Shortener system. Combining Redis to store short codes in memory and DynamoDB to store the main data helps the system achieve both high speed and strong scalability.
+I also learned more about the role of dashboards in enterprise operations. Metrics such as Fulfillment, Last Mile Cost, and Fill Rate are not just numbers. They reflect operational performance and help businesses make more accurate decisions.
+In addition, the event helped me distinguish different security layers in Cloud architecture. The combination of AWS WAF, CloudFront, and AWS KMS helps reduce system load, strengthen security, and protect data.
 
 ### 4.3. Modernization Strategy
 
-An important lesson is that AI projects in enterprises cannot stop at the demo stage. To be truly deployed, a project needs to prove its value through specific numbers.
-Enterprises often care about metrics such as:
-- How much cost the project can save each year.
-- How long the payback period is.
-- How much productivity increases.
-- Whether operational risks are reduced.
-In other words, an AI solution needs a clear ROI to convince business leaders.
-Continuous testing is also essential. An AI system may generate incorrectly formatted outputs or unexpected responses. Therefore, engineers need to test carefully across multiple layers, especially downstream services, to ensure that the system remains stable even when AI outputs are not as expected.
+Another lesson was the transition from “making it work” to “making it meet proper standards.” In enterprise environments or large-scale systems, a product does not only need to run. It must also meet operational, security, and compliance standards.
+For physical supply chains, businesses need to consider standards such as GMP, GSP, or GDP. For digital supply chains and Cloud infrastructure, standards such as ISO 27001, SOC 2, and GDPR become very important.
+This helped me understand that technology engineers should not only know how to build features. They also need to understand standards, processes, and responsibilities when bringing systems into real-world environments.
 
 ## 5. Applications to Study and Work
 
-From the knowledge gained, I can apply the lessons to my study and work in the following ways:
-- **Configuring Temperature more appropriately**: When asking AI to generate JSON, HTML, or code, I will prioritize using `Temperature = 0` or `0.1` to reduce structural errors.
-- **Breaking down problems when working with AI**: Instead of asking one chat session to handle an entire process, I will divide the problem into smaller tasks and check the output step by step.
-- **Applying Multi-Agent thinking**: For complex projects, I can separate roles such as requirement analysis, layout design, code generation, and review to reduce errors.
-- **Improving data security**: When working with AI in an enterprise environment, input and output filtering layers are necessary to prevent sensitive data leakage.
-- **Learning Terraform and Infrastructure as Code**: I will gradually move from manual configuration to infrastructure management through code for better control and easier redeployment.
-- **Focusing on backend fundamentals**: AI is a supporting tool, but system thinking, API knowledge, data structures, and software engineering fundamentals remain the most important factors for developers.
+From the knowledge gained, I can apply these lessons to my study and work in the following ways:
+- **Applying Cache-aside to backend projects**: When building APIs, I can add a Redis Cache layer in front of the database to reduce query load and improve response speed.
+- **Developing a System Thinker mindset**: When changing a feature or system configuration, I should evaluate its impact on other modules, Cloud costs, and overall performance.
+- **Focusing on DevOps fundamentals**: Instead of only learning tools, I need to study Linux, Networking, Git branching strategies, and system operation principles more deeply.
+- **Working with the spirit of “doing the right work”**: I need to build self-discipline, work responsibly, and aim to solve real problems in society.
+- **Practicing and sharing knowledge back**: I should participate more in hands-on labs, experiment with new technologies, and contribute knowledge to the community.
 
 ## 6. Personal Experience at the Event
 
-For me, **FCAJ Community Day - May 2026 Edition** was a memorable event because the content was not only theoretical but also connected to real enterprise problems.
+Attending **FCAJ Community Day - June 2026 Edition** on June 13, 2026, was a memorable experience for me. The event provided many practical lessons about Cloud, DevOps, data, and personal development in the technology industry.
 
 ### 6.1. Learning from Experienced Speakers
 
-The speakers from AWS Vietnam, VPBank, VIB, Pacific Vietnam, and Gothamic X provided many practical perspectives. I understood more clearly the difference between a personal project or a small school assignment and a real product that serves a large number of users.
+The speakers shared many real-life stories, helping me better understand the gap between learning technology in theory and applying it in a real enterprise environment.
+One statement that impressed me was that we should not use AI to “turn off our brain,” but rather use AI to upgrade our own capabilities. This made me reflect on my learning method in the AI era and realize that tools only become truly valuable when users still maintain strong foundational thinking.
 
-Especially in the banking sector, a system does not only need to run. It must also be secure, stable, compliant, and capable of protecting user data.
+### 6.2. Exposure to Real Technical Architecture
 
-### 6.2. Exposure to Modern Technical Models
+The analysis of high-scale AWS architecture helped me visualize how a request passes through multiple layers of a system. From Route 53 and ALB to services running on Fargate, Redis, and DynamoDB, each component plays a specific role in ensuring performance and high availability.
+Because of this, I understood that a high-availability system is not achieved simply by using Cloud services. It depends on how the request flow is designed, how responsibilities are separated, and how fallback plans are prepared for each layer.
 
-The event helped me better visualize how Multi-Agent systems can work together in a real system. Each Agent takes on a separate responsibility, from financial analysis and market research to team evaluation and risk control.
+### 6.3. Experience with Enterprise Dashboards and Tools
 
-I also learned that even when Temperature is set to 0, AI can still produce different results due to infrastructure factors and inference optimization behind the scenes. This gave me a more realistic perspective, instead of assuming that AI always produces perfectly identical results.
-
-### 6.3. Experience with Modern Tools
-
-The Amazon Q Business and QuickSight demo showed that data analysis is becoming much more accessible. Users do not need to write complex commands. They can use natural language to request analysis, visualization, and dashboard generation.
-
-In addition, MCP opens a new direction for AI Agents, allowing AI to connect with tools and perform actions instead of only replying with text.
+I also had the opportunity to explore examples of enterprise operational dashboards. Through this, I realized that raw data, when processed and presented properly, can become a powerful tool for decision-making.
+A dashboard is not only used to display numbers. It also helps managers identify problems, monitor trends, and decide on suitable actions.
 
 ### 6.4. Networking and Discussion
 
-The event created an open space for students to meet, exchange ideas, and connect with people who share similar interests. Activities such as discussion, Q&A, and Lucky Draw made the atmosphere more friendly and encouraged participants to be more proactive.
-I realized that participating in technology communities not only helps me learn new knowledge but also expands my network, creates collaboration opportunities, and builds confidence.
+The atmosphere of the event was open and friendly. In addition to the in-person presentations, the event also connected with many members online through Google Meet. This gave me the opportunity to listen to experiences from AWS Community Builders and expand my professional network.
+I realized that participating in technology communities is a very effective way to learn, stay updated, and gain more motivation for personal growth.
 
 ## 7. Lessons Learned
 
 After the event, I gained several important lessons:
-- AI makes software development faster and cheaper, but it also increases the demand for engineers with strong system thinking.
-- AI should not be used by blindly copying results without understanding the underlying logic, because this can create serious risks in production environments.
-- A good technology system is not only one that runs, but one that is secure, reliable, maintainable, and able to create real value for users.
-- In enterprises, technology must be connected with business effectiveness, measurable ROI, and a serious testing process.
-- To grow sustainably in the IT industry, engineers need to focus on technical fundamentals, English skills, domain knowledge, and the ability to build real products.
+- Tools and frameworks may change constantly, but foundational knowledge and system thinking will always remain essential.
+- To grow sustainably in the technology industry, engineers need to learn through practice, build real products, and continuously improve their skills.
+- AI should be used as a thinking-support tool, not as a replacement for human learning and reasoning.
+- A good system should not only run successfully, but also be stable, secure, scalable, and aligned with real-world standards.
+- Sharing knowledge back to the community helps me learn more deeply and create more value for the people around me.
 
 ## 8. Event Participation Images
 
 ![Event Participation Evidence Image](<images/4-EventParticipated/Event2/event2(0).jpg>)
 
-> In summary, **FCAJ Community Day - May 2026 Edition** provided me with valuable knowledge about AI, Prompt Engineering, Multi-Agent systems, Cloud, security, and career mindset. The event helped me understand that in the AI era, engineers do not only need to know how to use new tools. They also need system thinking, product responsibility, and the ability to create real value for enterprises.
+> In summary, **FCAJ Community Day - June 2026 Edition** provided me with many practical and valuable perspectives on Cloud, DevOps, Data Analytics, and career mindset. The event not only supported my internship report but also helped me define more clearly my path toward becoming a technology engineer with strong foundations, professional responsibility, and an international-standard mindset.

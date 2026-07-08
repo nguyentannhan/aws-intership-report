@@ -19,12 +19,12 @@ pre: " <b> 1.1. </b> "
 ### Tasks to be Implemented This Week:
 
 | Day | Task | Start Date | Completion Date | Documentation/Source |
-| :--- | :--- | :--- | :--- | :--- |
-| Mon | - Meet and greet FCJ members <br> - Read and note down regulations and rules at the internship unit | 2026-04-20 | 2026-04-20 | [Notion Group Description](https://www.notion.so/Group-description-TP-HCM-347df829a730809a8f63d39505644917) |
-| Tue | - Module 01-01: What is Cloud Computing? <br> - Module 01-02: What Makes AWS Different? <br> - Module 01-03: How to Start the Journey to the Cloud <br> - Module 01-04: AWS Global Infrastructure | 2026-04-21 | 2026-04-21 | [AWS Cloud Journey](https://cloudjourney.awsstudygroup.com/) |
-| Wed | - Module 01-05: AWS Service Management Tools <br> - Module 01-06: Cost Optimization on AWS and Working with AWS Support <br> - Module 01-07: Practice and Additional Research <br> - **Hands-on Practice:** <br>&emsp;+ Lab01-01: Create an AWS Account <br>&emsp;+ Lab01-02: Set up Virtual MFA Device <br>&emsp;+ Lab01-03: Create Admin Group and Admin User <br>&emsp;+ Lab01-04: Account Verification Support | 2026-04-22 | 2026-04-22 | [Lab Source 1](https://000001.awsstudygroup.com/) <br> [Lab Source 2](https://000002.awsstudygroup.com/) |
-| Thu | - **Budget Practice:** <br>&emsp;+ Lab07-01: Create Budget using Templates <br>&emsp;+ Lab07-02: Cost Budget Tutorial <br>&emsp;+ Lab07-03: Create Usage Budget <br>&emsp;+ Lab07-04: Create Reservation Instance (RI) Budget <br>&emsp;+ Lab07-05: Create Savings Plans Budget <br>&emsp;+ Lab07-06: Budget Cleanup | 2026-04-23 | 2026-04-23 | [Lab Source 1](https://000001.awsstudygroup.com/) |
-| Fri | - Complete 5 tasks to receive $200 credit: <br>&emsp;+ Launch EC2 Instance (+$20) <br>&emsp;+ Amazon Bedrock Playground (+$20) <br>&emsp;+ Set up AWS Budgets (+$20) <br>&emsp;+ Create Lambda Web App (+$20) <br>&emsp;+ Create RDS Database (+$20) <br> - Research: AWS Well-Architected Framework | 2026-04-24 | 2026-04-24 | [Lab Source 1](https://000001.awsstudygroup.com/) <br> [AWS Well-Architected](https://docs.aws.amazon.com/wellarchitected/) |
+| --- | --- | --- | --- | --- |
+| Monday | - Meet and greet FCJ members <br> - Read and note down regulations and rules at the internship unit | 2026-04-20 | 2026-04-20 | [Notion Group Description](https://www.notion.so/Group-description-TP-HCM-347df829a730809a8f63d39505644917) |
+| Tuesday | - Module 01-01: What is Cloud Computing? <br> - Module 01-02: What Makes AWS Different? <br> - Module 01-03: How to Start the Journey to the Cloud <br> - Module 01-04: AWS Global Infrastructure | 2026-04-21 | 2026-04-21 | [AWS Cloud Journey](https://cloudjourney.awsstudygroup.com/) |
+| Wednesday | - Module 01-05: AWS Service Management Tools <br> - Module 01-06: Cost Optimization on AWS and Working with AWS Support <br> - Module 01-07: Practice and Additional Research <br> - **Hands-on Practice:** <br>&emsp;+ Lab01-01: Create an AWS Account <br>&emsp;+ Lab01-02: Set up Virtual MFA Device <br>&emsp;+ Lab01-03: Create Admin Group and Admin User <br>&emsp;+ Lab01-04: Account Verification Support | 2026-04-22 | 2026-04-22 | [Lab Source 1](https://000001.awsstudygroup.com/) <br> [Lab Source 2](https://000002.awsstudygroup.com/) |
+| Thursday | - **Budget Practice:** <br>&emsp;+ Lab07-01: Create Budget using Templates <br>&emsp;+ Lab07-02: Cost Budget Tutorial <br>&emsp;+ Lab07-03: Create Usage Budget <br>&emsp;+ Lab07-04: Create Reservation Instance (RI) Budget <br>&emsp;+ Lab07-05: Create Savings Plans Budget <br>&emsp;+ Lab07-06: Budget Cleanup | 2026-04-23 | 2026-04-23 | [Lab Source 1](https://000001.awsstudygroup.com/) |
+| Friday | - Complete 5 tasks to receive $200 credit: <br>&emsp;+ Launch EC2 Instance (+$20) <br>&emsp;+ Amazon Bedrock Playground (+$20) <br>&emsp;+ Set up AWS Budgets (+$20) <br>&emsp;+ Create Lambda Web App (+$20) <br>&emsp;+ Create RDS Database (+$20) <br> - Research: AWS Well-Architected Framework | 2026-04-24 | 2026-04-24 | [Lab Source 1](https://000001.awsstudygroup.com/) <br> [AWS Well-Architected](https://docs.aws.amazon.com/wellarchitected/) |
 
 ---
 
@@ -95,7 +95,7 @@ pre: " <b> 1.1. </b> "
 **Lab01-02 — Set up Virtual MFA Device:**
 
 - Activated MFA for the root account using an Authenticator app.
-- ![Proof: MFA activation confirmation screen]()
+- ![Proof: MFA activation confirmation screen](images/1-Worklog/1.1-Week1/mfa-activated.png)
 
 **Lab01-03 — Create Admin Group and Admin User:**
 
@@ -106,7 +106,7 @@ pre: " <b> 1.1. </b> "
 **Lab01-04 — Account Verification Support:**
 
 - Practiced contacting AWS Support for account verification when necessary.
-- ![Proof: Support case creation success screen]()
+- ![Proof: Support case creation success screen](images/1-Worklog/1.1-Week1/support-case-success.png)
 
 **Lab07 — AWS Budgets Practice:**
 
@@ -116,37 +116,47 @@ pre: " <b> 1.1. </b> "
 - Lab07-04: Created an RI Budget to track Reserved Instances.
 - Lab07-05: Created a Savings Plans Budget.
 - Lab07-06: Deleted all Budgets after practice (cleanup).
-- 📸 _Proof: List of created Budgets in the AWS Budgets Console._
 
 **5 Tasks to Receive $200 Credit:**
 
 - **Task 1 — Launch EC2 Instance (+$20):**
-  - Created an EC2 instance named `Test Instance`, selected AMI, and configured Security Group.
-  - Created key pair `first-kp` (RSA, .pem).
-  - Terminated instance after completion (cleanup).
-  - 📸 _Proof: EC2 instance in 'running' state._
+  - Create an EC2 instance named `Test Instance`, select an AMI, and configure the Security Group.
+   ![Proof Image: Creating Test Instance EC2](images/1-Worklog/1.1-Week1/Create_server_EC2.png)
+  - Create the `first-kp` key pair (RSA, .pem).
+   ![Proof Image: Creating first-kp key pair](images/1-Worklog/1.1-Week1/Make_Pair_Key.png)
+  - Terminate the instance after completion (clean up).
+   ![Proof Image: Terminating EC2 instance after completion](images/1-Worklog/1.1-Week1/Delete_server.png)
+  - Complete the first task.
+   ![Proof Image: First task completed](images/1-Worklog/1.1-Week1/Finish_First_Mission.png)
 
 - **Task 2 — Amazon Bedrock Playground (+$20):**
-  - Accessed Bedrock Console, selected **Claude 3 Haiku** model.
-  - Submitted use case details and tested a prompt.
-  - 📸 _Proof: Response results from Bedrock Playground._
+ - Access the Bedrock Console, select the **Claude 3 Haiku** model.
+- Submit the use case details and test the prompt.
+  ![Proof Image: Access the Bedrock Console, select the Claude 3 Haiku model](images/1-Worklog/1.1-Week1/Choose_Claude3_Haiku.png)
+- Complete the second mission.
+  ![Proof Image: Complete the second mission](images/1-Worklog/1.1-Week1/Complete_Second_Mission.png)
 
 - **Task 3 — Set up AWS Budgets (+$20):**
   - Created a cost budget with email notifications.
-  - 📸 _Proof: Budget successfully created._
+   ![Proof Image: Budget created successfully](images/1-Worklog/1.1-Week1/Create_Budget.png)
+  - Complete the third mission.
+   ![Proof Image: Thrid task completed](images/1-Worklog/1.1-Week1/Finish_Third_Mission.png)
 
 - **Task 4 — Create Lambda Web App (+$20):**
   - Created Lambda function `http-function-url-tutorial` from a blueprint.
+   ![Proof Image: Create Lambda function ](images/1-Worklog/1.1-Week1/Create_Lambda_function.png)
   - Deleted function after completion (cleanup).
-  - 📸 _Proof: Lambda function successfully created._
+   ![Proof Image: Delete Lambda function](images/1-Worklog/1.1-Week1/Delete_Lambda_function.png)
+ - Complete the fourth mission.
+   ![Proof Image: Fourth task completed](images/1-Worklog/1.1-Week1/Finish_Fourth_Mission.png)
 
 - **Task 5 — Create RDS Database (+$20):**
   - Created Aurora (PostgreSQL Compatible) database using 'Easy Create'.
+   ![Proof Image: Created Aurora database](images/1-Worklog/1.1-Week1/Created_Aurora_database.png)
   - Deleted DB instance and cluster after completion (cleanup).
-  - 📸 _Proof: RDS database in 'Available' state._
-
-- 📸 _Overall Proof: AWS Billing Console showing the full $200 credit._
-
+   ![Proof Image: Deleted DB instance and cluster after completion](images/1-Worklog/1.1-Week1/Delete_DB.png)
+ - Complete the fifth mission.
+   ![Proof Image: Fifth task completed](images/1-Worklog/1.1-Week1/Finish_Fifth_Mission.png)
 ---
 
 #### Challenges and Solutions

@@ -16,8 +16,6 @@ pre: " <b> 1.3. </b> "
 - Thực hành quản trị chi phí và quyền sử dụng EC2 bằng IAM Policy.
 - Dọn dẹp tài nguyên sau khi hoàn thành lab để tránh phát sinh chi phí.
 
----
-
 ### Các công việc cần triển khai trong tuần này:
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
@@ -29,7 +27,6 @@ pre: " <b> 1.3. </b> "
 | 6 | - Module 5.1: Modify EC2 Instance Type <br> - Module 5.2: Create and Manage EBS Snapshots <br> - Module 5.3: Create Custom AMI <br> - Module 5.4: Launch Instance from Custom AMI <br> - Module 5.5 - 5.7: Recover access và Remote Desktop Ubuntu | 15/05/2026 | 15/05/2026 | https://000004.awsstudygroup.com/ |
 | 7 | - Module 6: Deploy AWS User Management Application on Amazon Linux <br> - Cài LAMP Server, cấu hình database, phpMyAdmin, Node.js và deploy app | 16/05/2026 | 16/05/2026 | https://000004.awsstudygroup.com/ |
 | CN | - Module 7: Deploy Node.js Application on Windows EC2 <br> - Module 8: Cost & Usage Governance with IAM <br> - Module 9: Clean up resources | 17/05/2026 | 17/05/2026 | https://000004.awsstudygroup.com/ |
----
 
 ### Kết quả đạt được tuần 3:
 
@@ -85,8 +82,6 @@ pre: " <b> 1.3. </b> "
 - Có thể hạn chế tạo EC2 theo Region, Instance Family hoặc Instance Type.
 - Có thể kiểm soát quyền xóa tài nguyên theo IP hoặc thời gian.
 - Hiểu tầm quan trọng của governance để tránh lạm dụng tài nguyên và phát sinh chi phí.
-
----
 
 #### Thực hành
 
@@ -181,8 +176,6 @@ pre: " <b> 1.3. </b> "
 - Kiểm tra Billing Dashboard sau khi dọn dẹp.
 - 📸 _Ảnh minh chứng: không còn instance running._
 - 📸 _Ảnh minh chứng: Billing không phát sinh bất thường._
-
----
 
 #### Khó khăn và cách giải quyết
 

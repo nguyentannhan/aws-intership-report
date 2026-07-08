@@ -1,151 +1,124 @@
 ---
 title: "Event 1"
-date: 2026-05-09
+date: 2026-06-27
 weight: 1
 chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-# Bài thu hoạch “FCAJ Community Day”
+# Bài thu hoạch “FCAJ Community Day - June 2026 Edition”
 
-## 1. Mục tiêu của sự kiện
+### 1. Mục tiêu của sự kiện
 
-Sự kiện **FCAJ Community Day** được tổ chức nhằm mang đến cho sinh viên công nghệ những kiến thức thực tế về tư duy học tập, kỹ năng sử dụng AI và định hướng nghề nghiệp trong bối cảnh ngành CNTT đang thay đổi rất nhanh.
-Nội dung chương trình tập trung vào các mục tiêu chính sau:
-- Giúp người tham gia hiểu cách tạo động lực học tập bền vững thông qua cơ chế Dopamine và các phương pháp rèn luyện kỷ luật cá nhân.
-- Chia sẻ kỹ thuật xây dựng Prompt nâng cao để làm việc hiệu quả hơn với các mô hình ngôn ngữ lớn như ChatGPT, Gemini hoặc Claude.
-- Cung cấp góc nhìn thực tế về thị trường tuyển dụng, lộ trình phát triển nghề nghiệp và những phẩm chất doanh nghiệp kỳ vọng ở sinh viên CNTT.
-- Giới thiệu phương pháp phát triển phần mềm BMX/BMM kết hợp AI Agent nhằm tối ưu quy trình làm việc, giảm lỗi và hạn chế hiện tượng AI tạo ra thông tin sai lệch.
+- Giúp người tham gia có cái nhìn rõ hơn về lộ trình phát triển nghề nghiệp trong lĩnh vực Cloud/DevOps, đặc biệt trong bối cảnh AI đang tạo ra nhiều thay đổi trên thị trường lao động.
+- Chia sẻ cách xây dựng hệ thống trợ lý giọng nói ứng dụng AI, có khả năng xử lý tiếng Việt và áp dụng vào các bài toán thực tế trong ngành Ngân hàng.
+- Giới thiệu hướng tiếp cận tự động hóa quy trình vận hành, giám sát và xử lý sự cố hạ tầng thông qua DevOps AI Agent.
+- Trình bày cách ứng dụng Amazon Q Business, giao thức MCP và mô hình kết nối riêng tư nhằm nâng cao hiệu quả quản trị nhân sự, đồng thời đảm bảo an toàn dữ liệu nội bộ.
 
-## 2. Các diễn giả tham gia
+### 2. Danh sách diễn giả
 
-Chương trình có sự góp mặt của nhiều diễn giả với kinh nghiệm thực tế trong lĩnh vực công nghệ và phát triển phần mềm:
-- **Anh Long**: Chia sẻ chủ đề về kỹ thuật “hack não bộ” để tạo thói quen học tập.
-- **Anh Thịnh**: Trình bày nội dung về Ultimate Prompt Engineering.
-- **Anh Khang**: Solutions Architect tại Cloud Kinetics, có kinh nghiệm trong tuyển dụng và định hướng nghề nghiệp cho kỹ sư công nghệ.
-- **Chị Thảo**: Software Developer tại Ngân hàng Quốc tế Việt Nam VIB.
+- **Anh Steve Trần** - Founder của Cloud Thinker, cựu Solution Architect tại Amazon/AWS Việt Nam.
+- **Anh Hiếu Nghị** - Cloud Specialist đến từ Renova Cloud.
+- **Anh Kiệt** - Kỹ sư giải pháp đến từ Student Video Group.
+- **Anh Trung** - Founder và CEO của R AI, từng sáng lập startup công nghệ tại Mỹ và được mua lại bởi công ty con của Google.
+- **Anh Nguyên Nguyễn & Chị Bảo** - Cloud Engineer đến từ Cloud Kinetics.
+- **Anh Trường (Owen) & Chị Minh Anh** - Solution Architects đến từ Noventic.
+- **Bạn Toàn Nguyễn** - AWS Security Builder.
 
-## 3. Những nội dung chính của sự kiện
+### 3. Nội dung nổi bật của sự kiện
 
-### 3.1. Tạo động lực học tập bằng cách hiểu cơ chế Dopamine
+#### 3.1. Định hướng Career Path và nền tảng "Agentic Ops" cho hạ tầng Cloud
 
-Một nội dung rất đáng chú ý trong sự kiện là cách biến việc học trở nên hấp dẫn hơn bằng cách tận dụng cơ chế hoạt động của não bộ. Dopamine không chỉ xuất hiện khi con người nhận được phần thưởng, mà còn tăng mạnh khi não kỳ vọng một phần thưởng sắp xảy ra.
-Đây cũng là lý do các nền tảng mạng xã hội như TikTok có thể giữ chân người dùng rất lâu thông qua sự tò mò và cảm giác chờ đợi nội dung tiếp theo.
-Từ cơ chế đó, việc học có thể được thiết kế lại theo một vòng lặp gồm bốn bước:
+- **Sự thay đổi của thị trường tuyển dụng**: Thị trường việc làm dành cho lập trình viên đang có sự dịch chuyển rõ rệt. Nhiều doanh nghiệp, từ tập đoàn lớn đến startup, có xu hướng giảm tuyển dụng các vị trí phổ thông và ưu tiên tìm kiếm những nhân sự có kinh nghiệm, biết tận dụng AI để tăng tốc độ phát triển sản phẩm và triển khai mã nguồn.
+- **Vai trò của con người trong hạ tầng Production**: Đối với hệ thống Cloud Infrastructure, đặc biệt là môi trường Production, mỗi phút gián đoạn đều có thể gây ra thiệt hại lớn về tài chính và uy tín doanh nghiệp. Vì vậy, AI không thể hoàn toàn thay thế con người mà chủ yếu đóng vai trò hỗ trợ. Doanh nghiệp vẫn cần đội ngũ kỹ sư có chuyên môn cao để đưa ra quyết định chính xác trong các tình huống sự cố quan trọng.
+- **Giải pháp Agentic Platform của Cloud Thinker**: Cloud Thinker giới thiệu định hướng xây dựng một hệ điều hành Agent, có khả năng hiểu được kiến trúc hệ thống từ tầng mã nguồn cho đến tầng logic nghiệp vụ. Nền tảng này hỗ trợ kỹ sư đọc log, phân tích nguyên nhân sự cố trong thời gian ngắn, tự động rà soát mã nguồn, đánh giá lỗi và tối ưu chi phí Cloud theo hướng FinOps. Điểm đáng chú ý là hệ thống không bị phụ thuộc cố định vào một nhà cung cấp hạ tầng duy nhất.
 
-**Tò mò → Thử nghiệm → Khám phá → Thỏa mãn**
-Thay vì ép bản thân học trong trạng thái nặng nề, người học có thể chia nhỏ mục tiêu và tạo ra cảm giác tiến bộ liên tục. Một số kỹ thuật được chia sẻ gồm:
-- **Loss Aversion – tâm lý sợ mất chuỗi**: Duy trì chuỗi ngày học bằng lịch, ứng dụng hoặc bảng theo dõi. Khi đã có một chuỗi học tập dài, bản thân sẽ có xu hướng không muốn phá vỡ nó.
-- **Chia nhỏ mục tiêu để giảm áp lực**: Não bộ thường dễ trì hoãn khi nhìn thấy một khối lượng kiến thức quá lớn. Vì vậy, thay vì đặt mục tiêu học AWS trong nhiều giờ, có thể bắt đầu bằng việc học một dịch vụ nhỏ trong 10–20 phút.
-- **Quy tắc 2 phút**: Những việc có thể bắt đầu trong vòng 2 phút như mở tài liệu, đọc một trang sách hoặc tạo file bài tập nên được thực hiện ngay để phá vỡ sự trì hoãn.
-- **Gamification trong học tập**: Người học có thể tự tạo hệ thống điểm kinh nghiệm, cấp bậc hoặc phần thưởng ngẫu nhiên sau mỗi phiên học để biến việc học thành một quá trình có phản hồi và động lực rõ ràng.
+#### 3.2. Kiến trúc trợ lý giọng nói Voice AI Agent cho thị trường tiếng Việt
 
-### 3.2. Kỹ thuật Prompt Engineering nâng cao
+- **Thách thức về ngôn ngữ tiếng Việt**: Các mô hình Speech-to-Speech hiện đại trên thế giới hiện nay thường hỗ trợ tiếng Anh tốt hơn so với tiếng Việt. Vì tiếng Việt là ngôn ngữ có nhiều đặc trưng về dấu, vùng miền và ngữ cảnh giao tiếp, việc áp dụng trực tiếp các mô hình quốc tế vào thị trường Việt Nam vẫn còn nhiều hạn chế.
+- **Mô hình Voice Agent 3 tầng: STT → LLM → TTS**: Để triển khai Voice Bot tổng đài cho các ngân hàng lớn như VPBank hoặc VIB, giải pháp phù hợp là chia quy trình xử lý thành 3 lớp chính:
+  1. *Speech-to-Text (STT)*: Hệ thống tiếp nhận âm thanh theo thời gian thực và chuyển đổi giọng nói thành văn bản dạng streaming
+  2. *Large Language Model (LLM)*: Văn bản sau khi được chuyển đổi sẽ được đưa vào mô hình ngôn ngữ lớn để xử lý nghiệp vụ, hiểu yêu cầu của khách hàng và tạo phản hồi ở dạng text. Lớp này giúp doanh nghiệp kiểm soát nội dung phản hồi, hạn chế tình trạng AI trả lời sai ngữ cảnh, đồng thời hỗ trợ gọi các công cụ hệ thống như khóa thẻ ngân hàng, xác thực CCCD hoặc kiểm tra thông tin khách hàng.
+  3. *Text-to-Speech (TTS)*: Phản hồi văn bản tiếp tục được chuyển thành giọng nói tự nhiên. Hệ thống có thể xử lý cách xưng hô theo giới tính như “Anh/Chị”, đồng thời áp dụng cơ chế turn-taking để xử lý các tình huống người dùng nói ngắt quãng hoặc chen ngang trong cuộc hội thoại.
 
-Phần Ultimate Prompt Engineering giúp người tham gia hiểu rằng một prompt tốt không chỉ đơn giản là đặt câu hỏi cho AI. Một prompt hiệu quả cần có cấu trúc rõ ràng để AI hiểu đúng vai trò, nhiệm vụ và kết quả mong muốn.
-Một prompt hoàn chỉnh thường bao gồm 7 thành phần:
-1. **Role** – vai trò của AI.
-2. **Instruction** – yêu cầu cần thực hiện.
-3. **Context** – bối cảnh của bài toán.
-4. **Input Data** – dữ liệu đầu vào.
-5. **Output Format** – định dạng kết quả mong muốn.
-6. **Examples** – ví dụ minh họa.
-7. **Constraints** – các giới hạn hoặc điều kiện cần tuân thủ.
-Ngoài ra, diễn giả cũng giải thích về **Token**, đơn vị mà mô hình ngôn ngữ sử dụng để xử lý văn bản. Một điểm đáng lưu ý là văn bản tiếng Việt thường tiêu tốn nhiều token hơn tiếng Anh, từ đó có thể làm tăng chi phí khi sử dụng API trong môi trường doanh nghiệp.
-Một số kỹ thuật tư duy nâng cao cũng được giới thiệu, bao gồm:
-- **Chain of Thought**: Hướng dẫn AI suy luận theo từng bước để tăng độ chính xác.
-- **Tree of Thought**: Cho phép AI xem xét nhiều hướng suy luận khác nhau trước khi chọn hướng phù hợp nhất.
-- **Self-Consistency**: Tạo nhiều luồng suy nghĩ độc lập và chọn kết quả có độ nhất quán cao nhất.
-Bên cạnh lý thuyết, sự kiện còn trình bày case study về **Project Prompt Optimizer**, một dự án tối ưu prompt tự động được xây dựng trên kiến trúc Serverless của AWS. Hệ thống sử dụng các dịch vụ như CloudFront, S3, Amazon Cognito, API Gateway, AWS Lambda, DynamoDB và Amazon Bedrock để tạo nên một nền tảng xử lý prompt linh hoạt, an toàn và có khả năng mở rộng.
+#### 3.3. Tự động hóa xử lý sự cố Production bằng DevOps AI Agent
 
-### 3.3. Định hướng nghề nghiệp cho sinh viên CNTT
+- **Khó khăn trong vận hành hệ thống lớn**: Khi hệ thống gặp sự cố như ứng dụng bị sập, độ trễ tăng cao hoặc dịch vụ phản hồi bất thường, đội ngũ DevOps thường phải mất nhiều thời gian để kiểm tra. Nguyên nhân là log, trace và các dữ liệu giám sát thường nằm rải rác ở nhiều nơi, khiến quá trình tìm lỗi và khôi phục hệ thống bị kéo dài.
+- **Quy trình 4 bước của DevOps Agent**:
+  - *Bước 1 - Phân loại sự cố*: AI nhận tín hiệu trigger từ cảnh báo CloudWatch, sau đó tự động thu thập và gom nhóm các log liên quan đến sự cố.
+  - *Bước 2 - Điều tra nguyên nhân*: Dựa trên sơ đồ topology của hệ thống đã được học trước đó, AI đưa ra các giả thuyết lỗi và tiến hành phân tích để tìm nguyên nhân gốc rễ.
+  - *Bước 3 - Đề xuất phương án khắc phục*: AI tạo ra một kịch bản xử lý sự cố theo hướng an toàn. Tuy nhiên, trước khi thực thi trên môi trường Production, phương án vẫn cần có sự xác nhận của con người theo cơ chế Human-in-the-loop để hạn chế rủi ro.
+  - *Bước 4 - Cải tiến dài hạn*: Sau khi xử lý sự cố, hệ thống tiếp tục đề xuất các phương án tối ưu để tránh việc lỗi tương tự lặp lại trong tương lai.
+- **Chi phí vận hành**: Dịch vụ được tính phí dựa trên thời gian chạy thực tế của Agent. Mức chi phí được chia sẻ khoảng **0.083 USD/giây** cho toàn bộ quá trình tính toán, dựng topology và xử lý incident.
 
-Một phần quan trọng của sự kiện là góc nhìn thực tế về lý do nhiều sinh viên năm 3, năm 4 vẫn chưa sẵn sàng đi làm. Diễn giả nhấn mạnh rằng AI có thể là công cụ khuếch đại năng lực, nhưng kết quả phụ thuộc rất nhiều vào cách con người sử dụng nó.
-Nếu người học chỉ sao chép kết quả từ AI mà không hiểu bản chất, AI có thể khiến năng lực thực sự trở nên yếu hơn. Ngược lại, nếu biết tư duy, biết kiểm chứng và biết đặt câu hỏi đúng, AI có thể giúp tăng hiệu suất làm việc lên nhiều lần.
-Một số bài học nghề nghiệp nổi bật gồm:
-- **Tư duy “Why” quan trọng hơn “What”**: Không chỉ hỏi “làm thế nào để hoàn thành”, mà cần hỏi “tại sao chọn cách này”, “vì sao dùng kiến trúc này”, “trade-off là gì”.
-- **Không lạm dụng AI trong học tập và tuyển dụng**: Một bài làm nhìn có vẻ hoàn hảo nhưng người làm không giải thích được sẽ không thuyết phục bằng một bài làm vừa phải nhưng thể hiện tư duy thật.
-- **Integrity – sự liêm chính trong công việc**: Khi nhận một yêu cầu, người làm tốt cần chủ động bóc tách thêm các trường hợp ngoại lệ, xử lý vấn đề có trách nhiệm ngay cả khi không có người giám sát.
-- **Tầm nhìn dài hạn**: Khi mới ra trường, không nên chỉ nhìn vào lương ngắn hạn mà cần quan tâm đến kinh nghiệm, kiến thức, mối quan hệ và cơ hội phát triển lâu dài.
-Diễn giả cũng chia sẻ mô hình 3 vòng tròn của công việc lý tưởng, gồm:
-- Việc bản thân yêu thích.
-- Việc doanh nghiệp thật sự cần.
-- Lợi ích nhận được từ công việc.
-Bên cạnh đó, 5 yếu tố mà doanh nghiệp thường dùng để đánh giá ứng viên gồm: **thái độ, trình độ học vấn, kinh nghiệm, trải nghiệm thực tế và tố chất cá nhân**. Trong đó, thái độ được xem là yếu tố đặc biệt quan trọng đối với sinh viên mới ra trường hoặc fresher.
+#### 3.4. Ứng dụng Amazon Q Business và giao thức MCP trong quản trị nhân sự
 
-### 3.4. Phương pháp BMX/BMM trong phát triển phần mềm với AI Agent
+- **Vấn đề trong quy trình tuyển dụng truyền thống**: Bộ phận HR thường mất nhiều thời gian khi phải đọc và lọc CV thủ công. Quy trình này có thể kéo dài từ 1 đến 2 tháng, dễ bỏ sót ứng viên phù hợp và đôi khi kết quả đánh giá còn bị ảnh hưởng bởi cảm tính thay vì dựa trên dữ liệu rõ ràng.
+- **Xây dựng HR Assistant bằng Quick Desktop**: Diễn giả trình bày cách nạp các file Markdown có cấu trúc vào hệ thống để AI tự động cấu hình kỹ năng xử lý. Công cụ có thể OCR và phân tích sâu dữ liệu CV, kể cả các file scan hoặc hình ảnh. Sau đó, AI đối chiếu thông tin ứng viên với yêu cầu trong JD để chấm điểm, phân loại ứng viên theo các mức như Strong, Good hoặc Low, đồng thời hỗ trợ đồng bộ lịch phỏng vấn và soạn email gửi ứng viên.
 
-Sự kiện cũng giới thiệu phương pháp BMX/BMM, một hướng tiếp cận giúp kết hợp AI Agent vào quy trình phát triển phần mềm theo cách có tổ chức hơn.
-Thay vì đưa toàn bộ yêu cầu vào một đoạn chat dài rồi yêu cầu AI tạo ra sản phẩm hoàn chỉnh, phương pháp này chia quy trình thành nhiều vai trò khác nhau như PM, Architect, Product Owner, Scrum Master, Developer và Reviewer/QA.
-Điểm quan trọng của phương pháp này là giảm rủi ro **hallucination**, tức hiện tượng AI tạo ra thông tin hoặc mã nguồn không chính xác. Khi context quá dài và yêu cầu quá phức tạp, AI dễ bị mất trọng tâm. Vì vậy, BMX/BMM đề xuất chia nhỏ tài liệu PRD và kiến trúc hệ thống thành các Epic và Story độc lập.
-Mỗi Story sẽ được kiểm soát theo từng trạng thái như:
-**Draft → Approved → Review → Done**
-Developer Agent chỉ thực hiện các Story đã được phê duyệt. Sau đó, Reviewer Agent và QA Agent tiếp tục kiểm tra, phản hồi và sửa lỗi cho đến khi kết quả đạt yêu cầu.
-Tư duy cốt lõi của phương pháp này là: muốn AI tạo ra sản phẩm tốt thì con người cần viết tài liệu thật rõ ràng, có cấu trúc và có tiêu chí kiểm tra cụ thể.
+#### 3.5. Giải pháp Private Security và bảo mật kết nối MCP Server
 
-## 4. Những kiến thức rút ra sau sự kiện
+- **Nguy cơ rò rỉ dữ liệu trong môi trường Enterprise**: Khi các AI Agent được kết nối với các nền tảng bên thứ ba như Gmail, Jira, GitHub hoặc Zalo thông qua Public Endpoint, doanh nghiệp có thể đối mặt với nhiều rủi ro bảo mật như Prompt Injection, Man-in-the-middle hoặc rò rỉ dữ liệu nội bộ.
+- **Kiến trúc kết nối bảo mật nội bộ thông qua VPC Connection**:
+  - Toàn bộ MCP Server được triển khai bên trong **Private Subnet** của doanh nghiệp, hạn chế truy cập trực tiếp từ môi trường Internet công cộng.
+  - Sử dụng **VPC Connection** kết hợp với **Interface Endpoint** để Amazon Q Business có thể truy vấn dữ liệu nội bộ một cách riêng tư, không cần đi qua Internet công khai.
+  - Luồng traffic được phân phối thông qua **Application Load Balancer (ALB)**, kết hợp chứng chỉ TLS từ AWS Certificate Manager (ACM) để mã hóa dữ liệu truyền tải.
+  - Việc xác thực người dùng được thực hiện thông qua **Amazon Cognito**, giúp kiểm soát quyền truy cập an toàn hơn.
+  - *Chi phí ước tính*: Mô hình hạ tầng private này có chi phí khoảng **250 - 350 USD/tháng**, bao gồm các thành phần như Route 53 Resolver, ALB, EC2 và các dịch vụ liên quan. Đây là mức chi phí cần thiết để đảm bảo luồng dữ liệu nội bộ được bảo vệ chặt chẽ hơn.
 
-### 4.1. Về tư duy học tập và thiết kế giải pháp
+### 4. Những kiến thức học được
 
-Sau sự kiện, tôi nhận ra rằng việc học công nghệ không nhất thiết phải bắt đầu bằng việc cố gắng học thật nhiều thứ cùng lúc. Với những lĩnh vực rộng như AWS, điều quan trọng hơn là nắm chắc các dịch vụ nền tảng, hiểu bản chất và biết cách liên kết chúng trong một kiến trúc thực tế.
-Bên cạnh đó, tư duy phản biện cũng rất quan trọng khi làm việc với AI. Không nên chấp nhận mọi câu trả lời của AI ngay lập tức, mà cần liên tục đặt câu hỏi “vì sao”, kiểm tra trade-off và đánh giá mức độ phù hợp với bài toán thực tế.
+#### 4.1. Tư Duy Thiết Kế
 
-### 4.2. Về kỹ thuật và kiến trúc hệ thống
+- **Tư duy cộng tác giữa AI và con người**: AI nên được xem là công cụ hỗ trợ và khuếch đại năng lực làm việc của con người, thay vì là giải pháp thay thế hoàn toàn. Đặc biệt, với các tác vụ liên quan đến sửa mã nguồn hoặc can thiệp trực tiếp vào hạ tầng Production, con người vẫn phải là người kiểm duyệt cuối cùng.
+- **Tư duy bảo mật theo hướng Zero Trust**: Khi triển khai AI trong các lĩnh vực nhạy cảm như Ngân hàng, Tài chính hoặc Y tế, yếu tố quan trọng nhất không chỉ là hệ thống hoạt động được, mà còn là đảm bảo bảo mật, quyền riêng tư và tuân thủ các yêu cầu pháp lý.
 
-Tôi hiểu rõ hơn cách xây dựng prompt chuyên nghiệp thông qua 7 thành phần quan trọng. Việc viết prompt có cấu trúc giúp AI trả lời chính xác hơn, tiết kiệm thời gian chỉnh sửa và hỗ trợ tốt hơn cho các công việc như phân tích yêu cầu, viết tài liệu, lập kế hoạch hoặc hỗ trợ lập trình.
-Ngoài ra, phần chia sẻ về token cũng giúp tôi có cái nhìn thực tế hơn về chi phí vận hành các hệ thống sử dụng LLM. Khi triển khai trong doanh nghiệp, việc tối ưu ngôn ngữ đầu vào, độ dài prompt và cách lưu lịch sử hội thoại đều ảnh hưởng trực tiếp đến chi phí.
-Tôi cũng học được cách phối hợp nhiều AI Agent trong một quy trình phát triển phần mềm. Việc chia nhỏ vai trò và giới hạn phạm vi xử lý của từng Agent giúp hệ thống dễ kiểm soát hơn, giảm lỗi và tránh việc AI xử lý quá nhiều thông tin cùng lúc.
+#### 4.2. Kiến Trúc Kỹ Thuật
 
-### 4.3. Về chiến lược phát triển trong thời đại AI
+- Hiểu rõ mô hình **Voice Bot 3 lớp**, bao gồm STT, LLM và TTS, cũng như vai trò của từng lớp trong việc xử lý hội thoại bằng tiếng Việt.
+- Nhận thức được tầm quan trọng của việc xây dựng dữ liệu huấn luyện đa dạng, đặc biệt là dữ liệu giọng nói vùng miền, nhằm cải thiện trải nghiệm người dùng cuối tại thị trường Việt Nam.
+- Nắm được cách AI được phân quyền và cô lập môi trường hoạt động thông qua khái niệm **Agent Space** trong hệ sinh thái DevOps Agent.
+- Hiểu cách thiết kế mô hình **VPC Connection** kết hợp với MCP Server để tạo ra một đường truyền dữ liệu khép kín, an toàn và phù hợp với môi trường doanh nghiệp trên AWS.
 
-Một bài học quan trọng khác là tư duy **Document-driven**, tức phát triển dựa trên tài liệu. Trong bối cảnh AI có thể hỗ trợ sinh mã nguồn, giá trị của con người không chỉ nằm ở việc viết code, mà còn nằm ở khả năng mô tả đúng vấn đề, thiết kế yêu cầu rõ ràng và kiểm soát chất lượng đầu ra.
-Ngoài ra, tôi cũng hiểu rằng quá trình phát triển nghề nghiệp cần được nhìn theo hướng dài hạn. Sai lầm là một phần cần thiết của quá trình học, miễn là bản thân biết rút kinh nghiệm và cải thiện liên tục.
+#### 4.3. Chiến Lược Hiện Đại Hóa
 
-## 5. Ứng dụng vào học tập và công việc
+- **Hiện đại hóa quy trình theo hướng nền tảng**: Việc đưa AI Agent vào doanh nghiệp lớn không chỉ đơn giản là thêm một công cụ mới. Doanh nghiệp cần tái cấu trúc một phần lớn quy trình vận hành truyền thống, đồng thời có lộ trình chuyển đổi phù hợp thông qua các dịch vụ Managed Service để người dùng có thể làm quen và áp dụng từng bước.
 
-Từ những kiến thức thu được, tôi có thể áp dụng vào học tập và công việc theo nhiều hướng cụ thể:
-- **Cải thiện cách viết prompt hằng ngày**: Khi sử dụng ChatGPT, Gemini hoặc các công cụ AI khác, tôi sẽ áp dụng đầy đủ vai trò, bối cảnh, dữ liệu đầu vào, định dạng đầu ra và ràng buộc để nhận được kết quả tốt hơn.
-- **Rèn luyện tư duy “Why” trong dự án**: Với mỗi quyết định kỹ thuật, tôi sẽ cố gắng đặt câu hỏi vì sao chọn cách này, có lựa chọn nào khác không và rủi ro của từng phương án là gì.
-- **Xây dựng thói quen tự học đều đặn**: Áp dụng phương pháp tích chuỗi, quy tắc 2 phút và chia nhỏ mục tiêu để duy trì việc học công nghệ mới mỗi ngày.
-- **Thử nghiệm quy trình AI Agent**: Tìm hiểu thêm về BMX/BMM và áp dụng vào các project cá nhân hoặc project nhóm để quản lý yêu cầu, chia nhỏ task và kiểm thử hiệu quả hơn.
-- **Tăng cường kỹ năng làm việc nhóm**: Chủ động tham gia các hoạt động cộng đồng, meetup hoặc workshop để luyện tập kỹ năng trình bày, phản biện và mở rộng network trong ngành công nghệ.
+### 5. Ứng dụng vào học tập và công việc
 
-## 6. Trải nghiệm cá nhân tại sự kiện
+- **Tối ưu CV để phù hợp với hệ thống AI Filter**: Khi viết CV, cần trình bày thông tin rõ ràng, có cấu trúc và sử dụng các từ khóa kỹ thuật sát với yêu cầu trong JD. Điều này giúp CV dễ được các hệ thống sàng lọc tự động bằng AI nhận diện và đánh giá chính xác hơn.
+- **Thực hành với DevOps AI Agent**: Có thể tận dụng chương trình dùng thử miễn phí 2 tháng của DevOps Agent trên AWS Console để trải nghiệm việc cấu hình, ánh xạ topology và thử phân tích các sự cố mô phỏng trên những cluster nhỏ.
+- **Tìm hiểu thêm về giao thức MCP**: Nghiên cứu cách xây dựng một MCP Server cơ bản trên môi trường local để hiểu cách các công cụ AI có thể kết nối với dữ liệu cá nhân hoặc dữ liệu doanh nghiệp theo cách có kiểm soát.
+- **Tập trung vào kiến thức nền tảng**: Không nên phụ thuộc hoàn toàn vào các công cụ AI sinh mã tự động. Thay vào đó, cần tiếp tục rèn luyện các kiến thức cốt lõi như Backend, mạng máy tính, JWT, bảo mật, Terraform và Infrastructure as Code để có thể làm chủ hệ thống khi xảy ra sự cố thực tế.
 
-Đối với tôi, **FCAJ Community Day** là một sự kiện rất có giá trị vì nội dung không chỉ dừng lại ở kiến thức kỹ thuật mà còn mở rộng sang tư duy nghề nghiệp, cách học và cách làm việc trong môi trường công nghệ hiện đại.
+### 6. Trải nghiệm cá nhân tại sự kiện
 
-### 6.1. Được học hỏi từ người có kinh nghiệm thực tế
+Tham gia sự kiện **“FCAJ Community Day - June 2026 Edition”** tại không gian văn phòng tầng 26 và 36 là một trải nghiệm học tập và kết nối rất ý nghĩa. Sự kiện giúp tôi có thêm góc nhìn thực tế hơn về cách GenAI đang được ứng dụng trong các môi trường Enterprise lớn, đặc biệt ở những lĩnh vực yêu cầu tính bảo mật và độ ổn định cao.
 
-Những chia sẻ từ anh Khang, chị Thảo và các diễn giả khác giúp tôi hiểu rõ hơn về môi trường doanh nghiệp, đặc biệt là cách nhà tuyển dụng nhìn nhận sinh viên mới ra trường.
-Tôi nhận ra rằng điểm số hoặc sản phẩm nhìn đẹp chưa đủ, điều quan trọng là bản thân phải hiểu được mình đã làm gì, vì sao làm như vậy và có thể giải thích được các quyết định của mình.
+#### 6.1. Học hỏi từ các diễn giả có kinh nghiệm
 
-### 6.2. Tiếp cận các ví dụ kỹ thuật thực tế
+Tôi có cơ hội lắng nghe những chia sẻ thực tế từ các founder, chuyên gia Cloud và kỹ sư nhiều kinh nghiệm như anh Steve Trần từ Cloud Thinker hay anh Trung từ R AI. Những câu chuyện về hành trình phát triển sự nghiệp, đặc biệt là quá trình vươn lên vị trí Solution Architect tại Amazon, đã mang lại cho tôi nhiều động lực trong việc tự học và định hướng nghề nghiệp sau này.
 
-Phần demo về kiến trúc Serverless của dự án Prompt Optimizer giúp tôi hình dung rõ hơn cách các dịch vụ AWS có thể kết hợp với nhau trong một hệ thống thực tế.
-Việc sử dụng Amazon Bedrock, DynamoDB, Lambda, API Gateway, Cognito, S3 và CloudFront cho thấy một kiến trúc hiện đại có thể được thiết kế linh hoạt, bảo mật và dễ mở rộng.
-Bên cạnh đó, các kỹ thuật như Chain of Thought, Tree of Thought và Self-Consistency cũng giúp tôi hiểu rằng làm việc với AI cần có phương pháp, không chỉ đơn giản là nhập câu hỏi và chờ kết quả.
+#### 6.2. Quan sát các demo kỹ thuật thực tế
 
-### 6.3. Thay đổi cách nhìn về AI
+Một trong những điểm nổi bật của sự kiện là các phần live demo. Tôi được quan sát hệ thống Voice Agent phản hồi thông tin sản phẩm Apple trên nền tảng Bedrock Agent Core, cũng như demo DevOps Agent tự động quét và dựng bản đồ hơn 300 mối quan hệ tài nguyên trong hệ thống chỉ trong khoảng 15 phút.
+Các phần trình bày bằng flow diagram cũng giúp tôi hiểu rõ hơn cách xử lý ngôn ngữ trong môi trường ngân hàng, nơi yêu cầu tính chính xác, an toàn và kiểm soát thông tin rất cao.
 
-Sau sự kiện, tôi hiểu rằng AI không phải là công cụ để thay thế hoàn toàn tư duy của con người. Nếu sử dụng sai cách, AI có thể khiến người học trở nên phụ thuộc và mất khả năng tự suy nghĩ.
-Nhưng nếu biết kiểm soát, đặt câu hỏi và đánh giá kết quả, AI sẽ trở thành một công cụ hỗ trợ rất mạnh trong học tập và công việc.
+#### 6.3. Tiếp cận các công cụ hiện đại
 
-### 6.4. Cơ hội kết nối và phát triển bản thân
+Thông qua phần trình bày về Amazon Quick Desktop, tôi hiểu hơn cách một người dùng không chuyên về kỹ thuật vẫn có thể khai thác dữ liệu và thực hiện các công việc phân tích cơ bản. Công cụ này giúp tự động hóa nhiều tác vụ lặp lại trong bộ phận quản trị nhân sự, từ đọc CV, đánh giá ứng viên cho đến hỗ trợ sắp xếp lịch phỏng vấn.
 
-Không khí sự kiện rất cởi mở, khuyến khích sinh viên đặt câu hỏi, trao đổi và chia sẻ quan điểm. Điều này giúp tôi có thêm động lực tham gia nhiều hơn vào các hoạt động cộng đồng công nghệ.
-Tôi cũng nhận ra rằng việc dám sai, dám hỏi và dám chia sẻ là một phần quan trọng trong quá trình phát triển bản thân.
+#### 6.4. Kết nối và trao đổi trong cộng đồng
 
-## 7. Bài học tổng kết
+Không khí sự kiện diễn ra rất cởi mở và sôi nổi. Các hoạt động hỏi đáp trực tiếp, trao đổi với diễn giả và minigame giúp người tham gia dễ dàng kết nối với nhau hơn. Đây cũng là cơ hội tốt để sinh viên có thể tiếp cận gần hơn với cộng đồng kỹ sư, chuyên gia và những người đang làm việc thực tế trong ngành.
 
-Sau khi tham gia sự kiện, tôi rút ra một số bài học quan trọng:
-- Người phát triển bền vững không nhất thiết là người thông minh nhất, mà là người biết duy trì kỷ luật, biết học đều đặn và biết tạo môi trường phù hợp cho bản thân.
-- AI không thay thế hoàn toàn lập trình viên, nhưng những người biết sử dụng AI đúng cách, có tư duy nền tảng và khả năng kiểm chứng sẽ có lợi thế rất lớn.
-- Trong học tập và công việc, cần giữ sự liêm chính, chủ động xử lý vấn đề đến nơi đến chốn và luôn đặt câu hỏi “Why” trước mỗi quyết định.
-- Lộ trình nghề nghiệp nên được nhìn theo hướng dài hạn, tập trung vào kinh nghiệm, kiến thức, network và cơ hội phát triển thay vì chỉ quan tâm đến lợi ích ngắn hạn.
+#### 7. Bài học rút ra
 
-## 8. Một số hình ảnh tham gia sự kiện
+- Sau sự kiện, tôi nhận ra rằng công nghệ không nên được theo đuổi một cách mù quáng. Điều quan trọng hơn là phải hiểu bài toán nghiệp vụ, hiểu nhu cầu thật sự của doanh nghiệp và lựa chọn công nghệ phù hợp để giải quyết vấn đề đó.
+- Bên cạnh đó, mọi giải pháp kiến trúc đều có sự đánh đổi. Một hệ thống dù hiện đại đến đâu cũng cần cân bằng giữa hiệu năng, độ trễ, bảo mật, khả năng mở rộng và chi phí vận hành.
 
-- ![Ảnh minh chứng: tham gia event](<images/4-EventParticipated/Event1/event1(0).jpg>)
-- ![Ảnh minh chứng: tham gia event](<images/4-EventParticipated/Event1/event1(1).jpg>)
+#### 8. Một số hình ảnh khi tham gia sự kiện
 
->Tổng kết lại, **FCAJ Community Day** là một sự kiện mang lại nhiều giá trị cả về kiến thức kỹ thuật lẫn tư duy phát triển cá nhân. Sự kiện giúp tôi hiểu rõ hơn cách học hiệu quả, cách sử dụng AI có trách nhiệm và cách chuẩn bị tốt hơn cho hành trình trở thành một kỹ sư công nghệ trong tương lai.
+![Ảnh minh chứng: tham gia event](<images/4-EventParticipated/Event1/event1(0).jpg>)
+
+> Tóm lại, buổi sinh hoạt Community Day tháng 6 đã mang lại cho tôi nhiều kiến thức thực tế về Agentic Ops, Voice AI Agent, DevOps AI Agent và bảo mật AI trong môi trường doanh nghiệp. Quan trọng hơn, sự kiện giúp tôi hình thành tư duy hệ thống rõ ràng hơn, hiểu được vai trò của AI trong công việc hiện đại và có thêm sự tự tin cho định hướng nghề nghiệp trong tương lai.

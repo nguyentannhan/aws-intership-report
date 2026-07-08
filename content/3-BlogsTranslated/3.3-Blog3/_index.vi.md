@@ -1,127 +1,100 @@
 ---
 title: "Blog 3"
-date: 2024-01-01
-weight: 1
+date: 2026-07-07
+weight: 3
 chapter: false
 pre: " <b> 3.3. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Hiện đại hóa ứng dụng và cơ sở dữ liệu với GenAI trên AWS
 
-# Bắt đầu với healthcare data lakes: Sử dụng microservices
-
-Các data lake có thể giúp các bệnh viện và cơ sở y tế chuyển dữ liệu thành những thông tin chi tiết về doanh nghiệp và duy trì hoạt động kinh doanh liên tục, đồng thời bảo vệ quyền riêng tư của bệnh nhân. **Data lake** là một kho lưu trữ tập trung, được quản lý và bảo mật để lưu trữ tất cả dữ liệu của bạn, cả ở dạng ban đầu và đã xử lý để phân tích. data lake cho phép bạn chia nhỏ các kho chứa dữ liệu và kết hợp các loại phân tích khác nhau để có được thông tin chi tiết và đưa ra các quyết định kinh doanh tốt hơn.
-
-Bài đăng trên blog này là một phần của loạt bài lớn hơn về việc bắt đầu cài đặt data lake dành cho lĩnh vực y tế. Trong bài đăng blog cuối cùng của tôi trong loạt bài, *“Bắt đầu với data lake dành cho lĩnh vực y tế: Đào sâu vào Amazon Cognito”*, tôi tập trung vào các chi tiết cụ thể của việc sử dụng Amazon Cognito và Attribute Based Access Control (ABAC) để xác thực và ủy quyền người dùng trong giải pháp data lake y tế. Trong blog này, tôi trình bày chi tiết cách giải pháp đã phát triển ở cấp độ cơ bản, bao gồm các quyết định thiết kế mà tôi đã đưa ra và các tính năng bổ sung được sử dụng. Bạn có thể truy cập các code samples cho giải pháp tại Git repo này để tham khảo.
-
----
+Trong quá trình phát triển phần mềm, nhiều doanh nghiệp hiện nay vẫn đang vận hành các hệ thống cũ theo kiến trúc monolithic. Ở giai đoạn đầu, mô hình này thường khá dễ triển khai, dễ quản lý và phù hợp với quy mô nhỏ. Tuy nhiên, khi hệ thống bắt đầu mở rộng, lượng người dùng tăng lên và yêu cầu kinh doanh thay đổi liên tục, kiến trúc monolithic dần bộc lộ nhiều hạn chế như thời gian phát hành chậm, khó mở rộng từng phần, chi phí vận hành cao và dễ gây ảnh hưởng dây chuyền khi có sự cố xảy ra.
+Vì vậy, hiện đại hóa ứng dụng không chỉ là việc thay đổi công nghệ hay nâng cấp mã nguồn, mà còn là quá trình thay đổi cách tư duy trong thiết kế, vận hành và phát triển hệ thống.
+Bài blog này được tổng hợp dựa trên nội dung từ nhóm Otokoshi, tập trung vào giải pháp **GenAI-powered App & Database Modernization**. Thay vì chỉ dừng lại ở việc “nâng cấp code”, quá trình hiện đại hóa là sự kết hợp giữa **Domain-Driven Design (DDD)**, **microservices**, **event-driven architecture**, **serverless computing** và các công cụ AI như **Amazon Q Developer** hoặc **AWS Transform**. Những công cụ này có thể hỗ trợ phân tích, chuyển đổi và tối ưu hệ thống từ tầng kiến trúc cho đến mã nguồn và cơ sở dữ liệu.
 
 ## Hướng dẫn kiến trúc
 
-Thay đổi chính kể từ lần trình bày cuối cùng của kiến trúc tổng thể là việc tách dịch vụ đơn lẻ thành một tập hợp các dịch vụ nhỏ để cải thiện khả năng bảo trì và tính linh hoạt. Việc tích hợp một lượng lớn dữ liệu y tế khác nhau thường yêu cầu các trình kết nối chuyên biệt cho từng định dạng; bằng cách giữ chúng được đóng gói riêng biệt với microservices, chúng ta có thể thêm, xóa và sửa đổi từng trình kết nối mà không ảnh hưởng đến những kết nối khác. Các microservices được kết nối rời thông qua tin nhắn publish/subscribe tập trung trong cái mà tôi gọi là “pub/sub hub”.
+Điểm thay đổi quan trọng trong quá trình hiện đại hóa là chuyển từ một khối monolithic lớn sang hệ sinh thái gồm nhiều dịch vụ nhỏ hơn, tức là microservices. Các service này được thiết kế độc lập, kết nối lỏng lẻo với nhau thông qua các luồng sự kiện theo mô hình event-driven.
+Thay vì viết lại toàn bộ hệ thống từ đầu, cách tiếp cận an toàn hơn là bóc tách từng phần dựa trên ranh giới nghiệp vụ. Nhờ vậy, doanh nghiệp có thể giảm rủi ro trong quá trình chuyển đổi, đồng thời từng bước đưa các thành phần phù hợp sang mô hình serverless hoặc microservices.
 
-Giải pháp này đại diện cho những gì tôi sẽ coi là một lần lặp nước rút hợp lý khác từ last post của tôi. Phạm vi vẫn được giới hạn trong việc nhập và phân tích cú pháp đơn giản của các **HL7v2 messages** được định dạng theo **Quy tắc mã hóa 7 (ER7)** thông qua giao diện REST.
+**Kiến trúc giải pháp hiện đại hóa có thể được hình dung như sau:**
 
-**Kiến trúc giải pháp bây giờ như sau:**
+![Hình 1. Sự dịch chuyển kiến trúc từ Monolithic sang Microservices kết hợp Event-driven và Serverless](images/3-BlogsTranslated/Blog3/blog3(0).jpg)
 
-> *Hình 1. Kiến trúc tổng thể; những ô màu thể hiện những dịch vụ riêng biệt.*
+> *Hình 1. Sự dịch chuyển kiến trúc từ Monolithic sang Microservices kết hợp Event-driven và Serverless.*
 
----
+Khi xác định ranh giới cho các thành phần trong hệ thống mới, hệ thống thường có những đặc điểm sau:
+* Bắt đầu từ business domain, tức là nghiệp vụ kinh doanh, trước khi lựa chọn công nghệ triển khai.
+* Mỗi chức năng quan trọng được tách thành một service độc lập và có khả năng tự vận hành.
+* Các service giao tiếp linh hoạt, bất đồng bộ thông qua event thay vì phụ thuộc hoàn toàn vào API call trực tiếp.
+* Mã nguồn có thể được triển khai và vận hành mà không cần quản lý trực tiếp máy chủ vật lý hoặc máy ảo bên dưới.
+Khi xây dựng chiến lược bóc tách hệ thống monolithic, cần cân nhắc một số yếu tố quan trọng:
+* **Nghiệp vụ**: Xác định các domain chính của hệ thống như quản lý đơn hàng, thanh toán, khách hàng hoặc kho hàng.
+* **Kiến trúc**: Sử dụng Bounded Context để chia nhỏ hệ thống, từ đó quyết định phần nào tiếp tục giữ lại và phần nào nên tách thành microservice.
+* **Lộ trình**: Ưu tiên hiện đại hóa từng phần thay vì thay đổi toàn bộ hệ thống trong một lần, nhằm giảm rủi ro và dễ kiểm soát tiến độ.
 
-Mặc dù thuật ngữ *microservices* có một số sự mơ hồ cố hữu, một số đặc điểm là chung:  
-- Chúng nhỏ, tự chủ, kết hợp rời rạc  
-- Có thể tái sử dụng, giao tiếp thông qua giao diện được xác định rõ  
-- Chuyên biệt để giải quyết một việc  
-- Thường được triển khai trong **event-driven architecture**
+## Lựa chọn công nghệ và mô hình tính toán
 
-Khi xác định vị trí tạo ranh giới giữa các microservices, cần cân nhắc:  
-- **Nội tại**: công nghệ được sử dụng, hiệu suất, độ tin cậy, khả năng mở rộng  
-- **Bên ngoài**: chức năng phụ thuộc, tần suất thay đổi, khả năng tái sử dụng  
-- **Con người**: quyền sở hữu nhóm, quản lý *cognitive load*
+| Khía cạnh hệ thống / Mức độ kiểm soát | Các dịch vụ AWS phù hợp / Mô hình tính toán |
+| --- | --- |
+| Cần kiểm soát chặt chẽ hệ điều hành, runtime và cấu hình | Amazon Elastic Compute Cloud (Amazon EC2) |
+| Ứng dụng container, microservices và cần orchestration | Amazon Elastic Container Service (ECS), Amazon EKS |
+| Chạy container nhưng không muốn quản lý máy chủ bên dưới | AWS Fargate |
+| Event-driven, xử lý tác vụ ngắn, API nhỏ, automation | AWS Lambda |
 
----
+## Domain-Driven Design (DDD)
 
-## Lựa chọn công nghệ và phạm vi giao tiếp
+![Quy trình hiện đại hóa ứng dụng 5 bước](images/3-BlogsTranslated/Blog3/blog3(1).jpg)
 
-| Phạm vi giao tiếp                        | Các công nghệ / mô hình cần xem xét                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Trong một microservice                   | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Giữa các microservices trong một dịch vụ | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Giữa các dịch vụ                         | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+Một sai lầm khá phổ biến khi hiện đại hóa hệ thống là bắt đầu bằng câu hỏi: “Nên dùng Lambda, ECS hay Kubernetes?”. Tuy nhiên, câu hỏi quan trọng hơn cần được đặt ra trước tiên là: “Hệ thống này đang phục vụ nghiệp vụ gì?”.
+**Domain-Driven Design (DDD)** giúp đội ngũ kỹ thuật và đội ngũ nghiệp vụ có thể trao đổi với nhau bằng một ngôn ngữ chung. Thông qua các buổi *event storming*, nhóm phát triển có thể xác định rõ:
+* Những sự kiện nghiệp vụ quan trọng và các actor tham gia.
+* Timeline của các bước xử lý chính trong hệ thống.
+* Các bounded context cần được bóc tách để phục vụ cho quá trình hiện đại hóa.
+Tuy nhiên, DDD cũng có một số thách thức nhất định. Phương pháp này đòi hỏi sự phối hợp liên tục giữa *domain expert* (chuyên gia nghiệp vụ) và *software expert* (chuyên gia phần mềm). Hai bên cần cùng nhau phân tích, trao đổi và làm rõ sự phức tạp của nghiệp vụ trước khi bắt đầu triển khai code.
 
----
+## Event-Driven Architecture
 
-## The pub/sub hub
+Event-Driven Architecture giúp giải quyết bài toán giao tiếp giữa các thành phần trong hệ thống. Nếu các microservices liên tục gọi nhau bằng API đồng bộ, hệ thống rất dễ rơi vào tình trạng phụ thuộc chéo. Khi một service gặp lỗi hoặc bị gián đoạn, các service khác cũng có thể bị ảnh hưởng theo.
+Với mô hình event-driven, cách xử lý sẽ linh hoạt hơn:
+* Một service, ví dụ như Order Service, chỉ cần phát ra sự kiện **OrderCreated**.
+* Các service khác như Payment, Inventory hoặc Notification sẽ độc lập lắng nghe sự kiện đó.
+* Việc điều phối sự kiện có thể được thực hiện thông qua các dịch vụ như **Amazon EventBridge**, **Amazon SNS** hoặc **Amazon SQS**.
 
-Việc sử dụng kiến trúc **hub-and-spoke** (hay message broker) hoạt động tốt với một số lượng nhỏ các microservices liên quan chặt chẽ.  
-- Mỗi microservice chỉ phụ thuộc vào *hub*  
-- Kết nối giữa các microservice chỉ giới hạn ở nội dung của message được xuất  
-- Giảm số lượng synchronous calls vì pub/sub là *push* không đồng bộ một chiều
+> Cách tiếp cận này giúp hệ thống linh hoạt hơn, dễ mở rộng hơn và giảm sự phụ thuộc trực tiếp giữa các thành phần. Nhờ đó, kiến trúc tổng thể trở nên loosely-coupled và ổn định hơn khi vận hành ở quy mô lớn.
 
-Nhược điểm: cần **phối hợp và giám sát** để tránh microservice xử lý nhầm message.
+## Compute Evolution: Chuyển dịch sang Serverless
 
----
+Một hướng đi quan trọng trong hiện đại hóa ứng dụng là chuyển dần sang mô hình serverless. Với mô hình này, đội ngũ phát triển không cần dành quá nhiều thời gian cho việc quản lý hạ tầng bên dưới.
+Các công việc như duy trì máy chủ, scaling, patching hoặc quản lý capacity sẽ được AWS đảm nhiệm. Nhờ vậy, lập trình viên có thể tập trung nhiều hơn vào logic nghiệp vụ và tốc độ phát triển tính năng.
+Một dịch vụ tiêu biểu trong hướng tiếp cận này là **AWS Lambda**:
+1. Phù hợp với các workload theo mô hình event-driven.
+2. Tối ưu chi phí nhờ khả năng tự động mở rộng và chỉ tính phí theo mức sử dụng thực tế.
+3. Giúp lập trình viên tập trung vào xử lý nghiệp vụ thay vì phải quản lý server.
 
-## Core microservice
+## Vai trò của GenAI trong giải pháp
 
-Cung cấp dữ liệu nền tảng và lớp truyền thông, gồm:  
-- **Amazon S3** bucket cho dữ liệu  
-- **Amazon DynamoDB** cho danh mục dữ liệu  
-- **AWS Lambda** để ghi message vào data lake và danh mục  
-- **Amazon SNS** topic làm *hub*  
-- **Amazon S3** bucket cho artifacts như mã Lambda
+### 1. Amazon Q Developer và AWS Transform
 
-> Chỉ cho phép truy cập ghi gián tiếp vào data lake qua hàm Lambda → đảm bảo nhất quán.
+GenAI không thể thay thế hoàn toàn vai trò của kiến trúc sư phần mềm. Tuy nhiên, trong quá trình hiện đại hóa hệ thống, GenAI có thể đóng vai trò như một trợ lý kỹ thuật mạnh mẽ, giúp rút ngắn thời gian phân tích, chuyển đổi và tối ưu mã nguồn.
 
----
+![Sự hỗ trợ của GenAI thông qua Amazon Q Developer và AWS Transform](images/3-BlogsTranslated/Blog3/blog3(2).jpg)
 
-## Front door microservice
+* **Amazon Q Developer**: Hỗ trợ phân tích codebase cũ, gợi ý cách bóc tách module, tạo tài liệu kỹ thuật, đề xuất test case và hỗ trợ refactor. Ví dụ, công cụ này có thể giúp nâng cấp phiên bản Java, giải thích dependency hoặc đề xuất cách cải thiện cấu trúc mã nguồn.
+* **AWS Transform**: Là dịch vụ agentic AI hỗ trợ hiện đại hóa ở quy mô lớn, đặc biệt phù hợp với các workload phức tạp như Windows, mainframe hoặc VMware.
+Ví dụ dưới đây minh họa một bản kế hoạch chuyển đổi dạng diff do AI đề xuất. Mục tiêu là thay thế lời gọi API đồng bộ trong hệ thống cũ bằng mô hình phát sự kiện thông qua EventBridge:
 
-- Cung cấp API Gateway để tương tác REST bên ngoài  
-- Xác thực & ủy quyền dựa trên **OIDC** thông qua **Amazon Cognito**  
-- Cơ chế *deduplication* tự quản lý bằng DynamoDB thay vì SNS FIFO vì:
-  1. SNS deduplication TTL chỉ 5 phút
-  2. SNS FIFO yêu cầu SQS FIFO
-  3. Chủ động báo cho sender biết message là bản sao
+```diff
+- // Legacy Monolithic Synchronous Call
+- paymentService.processPayment(order.getId(), order.getTotal());
+- inventoryService.deductItems(order.getItems());
 
----
-
-## Staging ER7 microservice
-
-- Lambda “trigger” đăng ký với pub/sub hub, lọc message theo attribute  
-- Step Functions Express Workflow để chuyển ER7 → JSON  
-- Hai Lambda:
-  1. Sửa format ER7 (newline, carriage return)
-  2. Parsing logic  
-- Kết quả hoặc lỗi được đẩy lại vào pub/sub hub
-
----
-
-## Tính năng mới trong giải pháp
-
-### 1. AWS CloudFormation cross-stack references
-Ví dụ *outputs* trong core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
++ // Modern Event-Driven Architecture with EventBridge
++ PutEventsRequestEntry eventEntry = PutEventsRequestEntry.builder()
++    .source("com.ecommerce.orders")
++    .detailType("OrderCreated")
++    .detail(orderJson)
++    .eventBusName("EcommerceEventBus")
++    .build();
++ eventBridgeClient.putEvents(PutEventsRequest.builder().entries(eventEntry).build());
+```
