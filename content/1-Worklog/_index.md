@@ -24,8 +24,9 @@ pre: " <b> 1. </b> "
 
 **Week 9:** [Automated resource management and manipulation via Command Line Interface (AWS CLI)](1.9-week9/)
 
-**Week 10:** [InboxIQ Project - Solution proposal and Serverless Event-Driven architecture design](1.10-week10/)
+**Week 10:** [Building the foundational identity and security layer with Amazon Cognito, IAM, Secrets Manager, and Google OAuth](1.10-week10/)
 
-**Week 11:** [InboxIQ Project - Core Backend infrastructure deployment (API Gateway, SQS, Lambda)](1.11-week11/)
+**Week 11:** [Completing the Gmail OAuth flow, token management, and handling granular permissions](1.11-week11/)
 
-**Week 12:** [InboxIQ Project - Frontend integration, AI, comprehensive testing, and acceptance](1.12-week12/)
+**Week 12:** [Completing OAuth deep linking and conducting a full-system security review](1.12-week12/)
+

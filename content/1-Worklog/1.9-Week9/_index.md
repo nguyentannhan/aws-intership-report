@@ -105,8 +105,6 @@ pre: " <b> 1.9. </b> "
 - Reviewed via CLI to ensure no running EC2 instances or forgotten S3 Buckets remained.
 - Saved cleanup time by typing commands instead of clicking back and forth between screens on the Console.
 
----
-
 ### Evaluation of Week 9 Results:
 
 - Successfully took the initial step in shifting the operational mindset from a Graphical User Interface (GUI) to a Command Line Interface (CLI).

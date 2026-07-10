@@ -1,95 +1,89 @@
 ---
-title : "Test the Gateway Endpoint"
-date : 2024-01-01 
-weight : 2
-chapter : false
-pre : " <b> 5.3.2 </b> "
+title: "5.3.2 Worker Lambda"
+date: 2026-07-07
+weight: 2
+chapter: false
+pre: " <b> 5.3.2. </b> "
 ---
 
-#### Create S3 bucket
+## Role
 
-1. Navigate to **S3 management console**
-2. In the Bucket console, choose **Create bucket**
+Triggered automatically by SQS when a new message arrives. Fetches the OpenAI key, fetches the Gmail token, calls the Gmail API for unread emails, calls OpenAI to summarize them, saves the result to DynamoDB, and pushes it to the client over WebSocket.
 
-![Create bucket](/images/5-Workshop/5.3-S3-vpc/create-bucket.png)
+## Global-scope cache — fixing "repeated Secrets Manager calls"
 
-3. In **the Create bucket console**
-+ **Name the bucket**: choose a name that hasn't been given to any bucket globally (hint: lab number and your name)
+```javascript
+let cachedOpenAIKey = null;
 
-![Bucket name](/images/5-Workshop/5.3-S3-vpc/bucket-name.png)
+async function getOpenAIKey() {
+  if (cachedOpenAIKey) return cachedOpenAIKey;
+  const result = await secrets.send(new GetSecretValueCommand({
+    SecretId: "inboxiq/openai-api-key"
+  }));
+  cachedOpenAIKey = JSON.parse(result.SecretString).apiKey;
+  return cachedOpenAIKey;
+}
+```
 
-+ Leave other fields as they are (default)
-+ Scroll down and choose **Create bucket**
+The `cachedOpenAIKey` variable is declared outside the `handler`, at global scope — the Lambda container is reused across invocations, so Secrets Manager is called only once per container lifetime instead of once per message.
 
-![Create](/images/5-Workshop/5.3-S3-vpc/create-button.png) 
+> **Issue encountered:** On the first test run, the Worker crashed with `SyntaxError: Expected property name or '}' in JSON at position 1` — the `inboxiq/openai-api-key` secret was stored in invalid JSON format (double quotes were swallowed by PowerShell when the secret was created). Fixed by writing the secret to a JSON file (`Out-File -Encoding ascii`) and pointing `--secret-string file://...` at it instead of typing JSON directly on the command line.
 
-+ Successfully create S3 bucket.
+![SyntaxError parsing the OpenAI key](images/5-Workshop/5.3-Backend-serverless/worker-syntax-error.jpg)
 
-![Success](/images/5-Workshop/5.3-S3-vpc/bucket-success.png)
+## Partial Batch Response — fixing "retrying the whole batch when one email fails"
 
-#### Connect to EC2 with session manager
+```javascript
+export const handler = async (event) => {
+  const batchItemFailures = [];
+  for (const record of event.Records) {
+    try {
+      // ... process each message
+    } catch (err) {
+      batchItemFailures.push({ itemIdentifier: record.messageId });
+    }
+  }
+  return { batchItemFailures };
+};
+```
 
-+ For this workshop, you will use **AWS Session Manager** to access several **EC2 instances**. **Session Manager** is a fully managed **AWS Systems Manager** capability that allows you to manage your **Amazon EC2 instances**  and on-premises virtual machines (VMs) through an interactive one-click browser-based shell. Session Manager provides secure and auditable instance management without the need to open inbound ports, maintain bastion hosts, or manage SSH keys.
+Combined with `ReportBatchItemFailures` in the SAM template — SQS only retries the specific message that failed within the batch, not the whole batch.
 
-+ First cloud journey [Lab](https://000058.awsstudygroup.com/1-introduce/) for indepth understanding of Session manager.
+## SAM Template
 
-1. In the **AWS Management Console**, start typing ```Systems Manager``` in the quick search box and press **Enter**:
+```yaml
+WorkerFunction:
+  Type: AWS::Serverless::Function
+  Properties:
+    FunctionName: inboxiq-worker
+    CodeUri: src/worker/
+    Handler: index.handler
+    Timeout: 300
+    Role: !Ref LambdaRoleArn
+    Environment:
+      Variables:
+        WS_ENDPOINT: !Sub "https://${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/prod"
+    Events:
+      SQSTrigger:
+        Type: SQS
+        Properties:
+          Queue: !Ref MainQueueArn
+          BatchSize: 5
+          FunctionResponseTypes:
+            - ReportBatchItemFailures
+```
 
-![system manager](/images/5-Workshop/5.3-S3-vpc/sm.png)
+## WebSocket Authorizer + Connect/Disconnect
 
-2. From the **Systems Manager** menu, find **Node Management** in the left menu and click **Session Manager**:
+3 supporting Lambdas for WebSocket:
+- **`inboxiq-ws-authorizer`** — verifies the JWT from the query string (`wss://...?token=xxx`) using the `aws-jwt-verify` library
+- **`inboxiq-ws-connect`** — saves the `connectionId ↔ userId` mapping to DynamoDB when a client connects
+- **`inboxiq-ws-disconnect`** — removes the mapping when a client disconnects
 
-![system manager](/images/5-Workshop/5.3-S3-vpc/sm1.png)
+> **Fixed from code review:** The 3 Lambda Permissions originally only had `Principal: apigateway.amazonaws.com` with no `SourceArn` restriction — a "confused deputy" vulnerability that would let any API Gateway invoke these functions. Added `SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocketApi}/*"` to scope it to InboxIQ's WebSocket API only.
 
-3. Click **Start Session**, and select **the EC2 instance** named **Test-Gateway-Endpoint**. 
-{{% notice info %}}
-This EC2 instance is already running in "VPC Cloud" and will be used to test connectivity to Amazon S3 through the Gateway endpoint you just created (s3-gwe). {{% /notice %}}
+## IAM Role — Least Privilege
 
-![Start session](/images/5-Workshop/5.3-S3-vpc/start-session.png)
+All 5 Lambdas (Producer, Worker, Authorizer, ws-connect, ws-disconnect) share a single `inboxiq-lambda-role` granting only what's needed: DynamoDB (Get/Put/Update/Delete/Query on exactly the 6 tables), SQS (Send/Receive/Delete on exactly the 2 queues), Secrets Manager (GetSecretValue on the exact secret path), KMS Decrypt, WebSocket ManageConnections, CloudWatch Logs, X-Ray — no excess permissions.
 
-**Session Manager** will open a new browser tab with a shell prompt: sh-4.2 $
-
-![Success](/images/5-Workshop/5.3-S3-vpc/start-session-success.png)
-
-You have successfully start a session - connect to the EC2 instance in VPC cloud. In the next step, we will create a S3 bucket and a file in it. 
-
-#### Create a file and upload to s3 bucket
-
-1. Change to the ssm-user's home directory by typing ```cd ~``` in the CLI
-
-![Change user's dir](/images/5-Workshop/5.3-S3-vpc/cli1.png)
-
-2. Create a new file to use for testing with the command ```fallocate -l 1G testfile.xyz```, which will create a file of 1GB size named "testfile.xyz".
-
-![Create file](/images/5-Workshop/5.3-S3-vpc/cli-file.png)
-
-3. Upload file to S3 bucket with command ```aws s3 cp testfile.xyz s3://your-bucket-name```. Replace your-bucket-name with the name of S3 bucket that you created earlier.
-
-![Uploaded](/images/5-Workshop/5.3-S3-vpc/uploaded.png)
-
-You have successfully uploaded the file to your S3 bucket. You can now terminate the session.
-
-#### Check object in S3 bucket
-
-1. Navigate to S3 console.  
-2. Click the name of your s3 bucket
-3. In the Bucket console, you will see the file you have uploaded to your S3 bucket
-
-![Check S3](/images/5-Workshop/5.3-S3-vpc/check-s3-bucket.png)
-
-#### Section summary
-
-Congratulation on completing access to S3 from VPC. In this section, you created a Gateway endpoint for Amazon S3, and used the AWS CLI to upload an object. The upload worked because the Gateway endpoint allowed communication to S3, without needing an Internet Gateway attached to "VPC Cloud". This demonstrates the functionality of the Gateway endpoint as a secure path to S3 without traversing the Public Internet.
-
-
-
-
-
-
-
-
-
-
-
-
-
+![IAM Role Permissions](images/5-Workshop/5.3-Backend-serverless/iam-role-permissions.jpg)

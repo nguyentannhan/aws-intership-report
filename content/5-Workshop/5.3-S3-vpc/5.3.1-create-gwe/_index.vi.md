@@ -1,40 +1,76 @@
 ---
-title : "Tạo một Gateway Endpoint"
-date : 2024-01-01 
-weight : 1
-chapter : false
-pre : " <b> 5.3.1 </b> "
+title: "Lambda Producer"
+date: 2026-07-07
+weight: 1
+chapter: false
+pre: " <b> 5.3.1. </b> "
 ---
 
-1. Mở [Amazon VPC console](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#Home:)
-2. Trong thanh điều hướng, chọn **Endpoints**, click **Create Endpoint**:
+## Vai trò
 
-{{% notice note %}}
-Bạn sẽ thấy 6 điểm cuối VPC hiện có hỗ trợ AWS Systems Manager (SSM). Các điểm cuối này được Mẫu CloudFormation triển khai tự động cho workshop này.
-{{% /notice %}}
+Nhận request REST từ client (kèm JWT đã được Cognito Authorizer verify), đóng gói message, đẩy vào SQS Main Queue, trả `202 Accepted` ngay lập tức — không đợi Worker xử lý xong.
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/endpoints.png)
+## Code chính (`src/producer/index.mjs`)
 
-3. Trong Create endpoint console:
-+ Đặt tên cho endpoint: s3-gwe
-+ Trong service category, chọn **aws services**
+```javascript
+export const handler = async (event) => {
+  const userId = event.requestContext.authorizer.claims.sub;
+  const body = JSON.parse(event.body || "{}");
+  const { connectionId, action = "check-gmail" } = body;
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/create-s3-gwe1.png)
+  const message = {
+    jobId: `job-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    userId, connectionId, action,
+    requestedAt: new Date().toISOString()
+  };
 
-+ Trong **Services**, gõ "s3" trong hộp tìm kiếm và chọn dịch vụ với loại **gateway**
+  await sqs.send(new SendMessageCommand({
+    QueueUrl: QUEUE_URL,
+    MessageBody: JSON.stringify(message)
+  }));
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/services.png)
+  return {
+    statusCode: 202,
+    body: JSON.stringify({ message: "Processing started", jobId: message.jobId })
+  };
+};
+```
 
-+ Đối với VPC, chọn **VPC Cloud** từ drop-down menu.
-+ Đối với Route tables, chọn bảng định tuyến mà đã liên kết với 2 subnets (lưu ý: đây không phải là bảng định tuyến chính cho VPC mà là bảng định tuyến thứ hai do CloudFormation tạo).
+`userId` được lấy trực tiếp từ `event.requestContext.authorizer.claims.sub` — API Gateway đã tự verify JWT qua Cognito Authorizer trước khi Lambda này được gọi, không cần verify token thủ công trong code.
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/vpc.png)
+## SAM Template — expose thành REST endpoint
 
-+ Đối với Policy, để tùy chọn mặc định là Full access để cho phép toàn quyền truy cập vào dịch vụ. Bạn sẽ triển khai VPC endpoint policy trong phần sau để chứng minh việc hạn chế quyền truy cập vào S3 bucket dựa trên các policies.
+```yaml
+ProducerFunction:
+  Type: AWS::Serverless::Function
+  Properties:
+    FunctionName: inboxiq-producer
+    CodeUri: src/producer/
+    Handler: index.handler
+    Timeout: 10
+    Role: !Ref LambdaRoleArn
+    Environment:
+      Variables:
+        SQS_QUEUE_URL: !Ref MainQueueUrl
+    Events:
+      CheckGmail:
+        Type: Api
+        Properties:
+          RestApiId: !Ref RestApi
+          Path: /check-gmail
+          Method: POST
+```
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/policy.png)
+> **Sửa từ code review:** Bản đầu có 2 resource trùng lặp (`ProducerFunction` không gắn Events + `CheckGmailApiEvent` mới thật sự nhận request) — đã gộp lại thành 1 resource duy nhất như trên, tránh dead code trong template.
 
-+ Không thêm tag vào VPC endpoint.
-+ Click Create endpoint, click x sau khi nhận được thông báo tạo thành công.
+## Kết quả deploy
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/complete.png)
+REST API endpoint: `https://rjc76njhya.execute-api.us-east-1.amazonaws.com/prod`
+
+Test bằng `curl.exe` kèm JWT token thật (lấy qua `aws cognito-idp initiate-auth`), nhận về đúng `202 Accepted`:
+
+```json
+{"message":"Processing started","jobId":"job-1783438359558-mq2qy4"}
+```
+
+![Test Producer thành công](images/5-Workshop/5.3-Backend-serverless/producer-test-202.jpg)

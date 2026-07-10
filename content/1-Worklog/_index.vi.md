@@ -24,8 +24,8 @@ pre: " <b> 1. </b> "
 
 **Tuần 9:** [Quản lý và thao tác tài nguyên tự động qua giao diện dòng lệnh (AWS CLI)](1.9-week9/)
 
-**Tuần 10:** [Dự án InboxIQ - Đề xuất giải pháp và thiết kế kiến trúc Serverless Event-Driven](1.10-week10/)
+**Tuần 10:** [Xây dựng lớp danh tính và bảo mật nền tảng với Amazon Cognito, IAM, Secrets Manager và Google OAuth](1.10-week10/)
 
-**Tuần 11:** [Dự án InboxIQ - Triển khai hạ tầng Core Backend (API Gateway, SQS, Lambda)](1.11-week11/)
+**Tuần 11:** [Xây dựng hoàn chỉnh luồng Gmail OAuth, quản lý Token và xử lý Granular Permissions](1.11-week11/)
 
-**Tuần 12:** [Dự án InboxIQ - Tích hợp Frontend, AI, kiểm thử toàn diện và nghiệm thu](1.12-week12/)
+**Tuần 12:** [Hoàn thiện Deep Link OAuth và rà soát bảo mật toàn hệ thống](1.12-week12/)

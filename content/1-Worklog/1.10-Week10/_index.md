@@ -1,57 +1,98 @@
 ---
 title: "Week 10 Worklog"
-date: 2026-06-22
+date: 2026-06-08
 weight: 10
 chapter: false
 pre: " <b> 1.10. </b> "
 ---
 
-### Key Objectives for Week 10:
+### Week 10 Objective: Building the Identity and Security Layer — the Invisible Foundation of the Entire System
 
-- Kick off the final capstone project: **InboxIQ - AI-powered email triage**.
-- Evaluate and finalize the Project Proposal, clearly defining the problem and the Serverless solution.
-- Deeply research the AWS services to be used in the architecture: API Gateway (REST & WebSocket), Amazon SQS, AWS Lambda, DynamoDB, and Cognito.
-- Design and draw the Architecture Diagram & Dataflow Diagram for the 5-tier system.
-- Create a Cost Estimation spreadsheet based on the AWS Free Tier and set up AWS Budgets to establish a safe financial barrier.
-- Prepare the account and environment to be ready for infrastructure deployment in the following week.
+In the InboxIQ team assignment, I was responsible for the authentication and security components, including Cognito, IAM, Secrets Manager, and the entire Google OAuth flow.
+This is the “invisible” part of the system. Users cannot directly see it, and it is not something that can easily be showcased during a demonstration. However, every other component depends on it: the application needs Cognito to identify logged-in users, Lambda functions need IAM Roles to access AWS resources, and the Worker needs secrets to call the OpenAI API.
+The objective for this week was to complete this foundational layer before the backend and Flutter members needed to integrate with it.
+- Create and configure a Cognito User Pool, including password policies, email verification, and an App Client for the mobile application.
+- Understand and select the appropriate authentication flow for the App Client, including why a mobile application is considered a public client and must not use a client secret.
+- Design IAM Roles for Lambda functions according to the Principle of Least Privilege.
+- Configure Secrets Manager to store the OpenAI API key and provide the backend member with a secure method for retrieving secrets.
+- Create a Google Cloud project, enable the Gmail API, and configure the OAuth consent screen in Testing mode with the minimum required scopes.
 
-### Detailed Action Plan:
+### Tasks to Be Completed During the Week:
 
-| Day | Task Details | Start Date | Completion Date | Reference Materials |
+| Day | Task Description | Start Date | Completion Date | Reference Materials |
 | --- | --- | --- | --- | --- |
-| Monday | - Team meeting to finalize the InboxIQ project proposal <br> - Analyze the email overload problem and shape the Event-Driven solution | 06/22/2026 | 06/22/2026 | InboxIQ Project Proposal |
-| Tuesday | - Understand the operating mechanism of API Gateway WebSocket for real-time <br> - Research Amazon SQS (Main & Dead-Letter Queue) | 06/23/2026 | 06/23/2026 | AWS Documentation (API Gateway, SQS) |
-| Wednesday | - Research Amazon Cognito for authentication <br> - Research how Lambda securely connects to SSM Parameter Store | 06/24/2026 | 06/24/2026 | AWS Documentation (Cognito, SSM) |
-| Thursday | - Draw the overall Architecture Diagram <br> - Sketch the Dataflow Diagram from Client to OpenAI | 06/25/2026 | 06/25/2026 | Draw.io / Lucidchart |
-| Friday | - Deconstruct data, design the schema for 6 DynamoDB tables <br> - Determine the necessary Partition Keys and Sort Keys | 06/26/2026 | 06/26/2026 | AWS DynamoDB Best Practices |
-| Saturday | - Create a system Cost Estimation spreadsheet <br> - Configure AWS Budgets and a Hard Limit on OpenAI ($5.00) | 06/27/2026 | 06/27/2026 | AWS Pricing Calculator |
-| Sunday | - Review the entire architecture design with the Mentor <br> - Finalize the deployment plan for week 11 <br> - Write the week 10 report | 06/28/2026 | 06/28/2026 | Internal Team Documents |
+| Monday | - Conducted a team meeting to finalize the system architecture and received responsibility for the authentication and security components. <br> - Studied the fundamentals of Amazon Cognito, including the differences between User Pools and Identity Pools, and determined that the project only required a User Pool for user authentication and JWT issuance. | 08/06/2026 | 08/06/2026 | https://docs.aws.amazon.com/cognito/ |
+| Tuesday | - Created a User Pool with email-based sign-in, a password policy, and email verification during registration. <br> - Created the `inboxiq-flutter-client` App Client without enabling a client secret because a mobile application is a public client and cannot securely store confidential credentials. Selected the appropriate authentication flow. | 09/06/2026 | 09/06/2026 | https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html |
+| Wednesday | - Created a test user and verified the login flow through the AWS CLI using `initiate-auth`, ensuring that the response returned the complete token set, including the ID token, access token, and refresh token. <br> - Handed over the User Pool ID, App Client ID, and enabled authentication flow to the Flutter member, together with a note to ensure that the client-side `authenticationFlowType` matched the actual Cognito configuration. | 10/06/2026 | 10/06/2026 | https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/ |
+| Thursday | - Designed the `inboxiq-lambda-role` IAM Role for Lambda functions, granting only the necessary permissions for DynamoDB, SQS, Secrets Manager, CloudWatch Logs, X-Ray, and `execute-api:ManageConnections` for future WebSocket push notifications. <br> - Studied the trade-off between using one shared role for simplicity during the MVP phase and assigning a separate role to each function for strict Least Privilege compliance. | 11/06/2026 | 11/06/2026 | https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html |
+| Friday | - Created the `inboxiq/openai-api-key` secret in Secrets Manager using JSON format. <br> - Researched and wrote an internal guideline for retrieving secrets within Lambda functions using global-scope caching, while strictly avoiding plaintext API keys in environment variables or source code repositories. | 12/06/2026 | 12/06/2026 | https://docs.aws.amazon.com/secretsmanager/ |
+| Saturday | - Created a Google Cloud project and enabled the Gmail API. <br> - Configured the OAuth consent screen in Testing mode, selected the minimum required scopes (`gmail.readonly` and `userinfo.email`), and added test email accounts to the Test users list. | 13/06/2026 | 13/06/2026 | https://developers.google.com/identity/protocols/oauth2 |
+| Sunday | - Created an OAuth Client ID of the Web application type in Google Cloud and securely stored the Client ID and Client Secret while waiting for the backend callback URL to become available in the following week. <br> - Wrote the weekly summary report and prepared documentation for handing over the authentication layer to the entire team. | 14/06/2026 | 14/06/2026 | Internal InboxIQ project documentation |
 
-### Summary of Achieved Results:
+### Week 10 Results:
 
-#### Knowledge & Design
-- Finalized the **Project Proposal** for InboxIQ, clearly defining the ROI and system risks.
-- Clearly understood why **Amazon SQS** must be used as a buffer: it helps decouple the process of receiving user requests from the process of calling the OpenAI API (which is time-consuming), avoiding client-side timeouts.
-- Grasped the mechanism of maintaining a two-way connection with **API Gateway WebSocket** to push results back from AWS Lambda to the mobile app without the client having to continuously "poll".
-- Completely designed the 5-tier architecture diagram (User, Backend, Workflow, Storage, Monitoring).
-- Strategized the secure storage of sensitive API keys (OpenAI Key, Gmail Client Secret) into **SSM Parameter Store** instead of hard-coding them in the Lambda source code.
+#### 1. Cognito — Understanding Why We “Rent” Instead of Building an Authentication System from Scratch
 
-#### Practical Implementation
-- Finished designing the NoSQL database schema for 6 specialized DynamoDB tables (User, Session, EmailMetadata, etc.).
-- Completed the cost estimation. Thanks to the 100% On-Demand architecture, the estimated AWS cost is $0.00 (completely within the Free Tier).
-- Successfully activated AWS Budgets alert sets ($5 and $10 thresholds) to prevent cost overruns.
+Before starting this task, I assumed that implementing authentication using JWT and bcrypt would not be particularly difficult.
+However, after spending a week studying Cognito documentation, I realized that the real complexity does not lie in simply making login work. It lies in everything surrounding the login process, including secure password storage, brute-force protection, password recovery, email verification, token refresh, and token revocation.
+Cognito manages the entire user authentication lifecycle. As a result, the team does not need to store any user passwords in its own database, which completely removes an important category of data leakage risk.
+The most important decision when creating the App Client was to **disable the client secret**.
+This decision was based on the nature of mobile applications. Since an APK file is distributed directly to users, any “secret” embedded inside the application can potentially be extracted through reverse engineering.
+Therefore, OAuth standards classify mobile applications as *public clients*, which are not capable of securely storing client secrets. I documented this point clearly for the team because it is also a likely topic during the project defense.
 
-### Challenges and Obstacles Faced:
-- Designing the WebSocket connection flow was logically complex, especially regarding how to store the `connectionId` in DynamoDB so the Lambda Worker knows exactly which user's device to return the results to.
-- Had to weigh heavily when designing the Partition Key for DynamoDB to avoid a "Hot Partition" situation when queries are concentrated on a specific user.
-- Confused in determining parameters for the Dead-Letter Queue (DLQ), such as the maximum number of retries before moving a message to the isolation area.
+#### 2. IAM Role — Least Privilege Is a Series of Decisions, Not a Checkbox
 
-### Solutions and Lessons Learned:
-- Drew a detailed Sequence Diagram for the WebSocket Handshake process so the team could easily visualize how the `connectionId` is created and stored.
-- Read more AWS NoSQL design documentation and decided to use a combination of `userId` and `messageId` as a composite partition key to distribute data evenly.
-- Set the SQS retry count (`maxReceiveCount`) to 3; if the Lambda Worker fails processing 3 consecutive times, the message is automatically pushed to the DLQ to avoid infinite loops that incur costs.
+Designing the Lambda IAM Role required me to answer specific questions for each function:
+- Which DynamoDB tables does the Worker need to read or write?
+- Does the Producer need permission to access Secrets Manager?
+- How narrowly should the `execute-api:ManageConnections` permission be scoped for WebSocket push notifications?
+The Producer does not need permission to access Secrets Manager because only the Worker requires the OpenAI API key.
+For the MVP, the team selected one shared role named `inboxiq-lambda-role`, containing the minimum combined set of permissions required by all Lambda functions.
+However, I also documented the limitation honestly: strict adherence to the Principle of Least Privilege would require a separate IAM Role for each function. This was recorded as a future improvement if the project were deployed to a production environment.
 
-### Plan and Roadmap for Next Week:
-- Enter the "combat" phase: Deploy the Backend infrastructure configuration on AWS.
-- Initialize Cognito, DynamoDB, and SSM Parameter Store.
-- Write Node.js code for the Lambda cluster (Producer & Worker) and configure SQS queues.
+#### 3. Secrets Manager — The Correct Place for Information That Must Never Be Exposed
+
+The team agreed on one core principle: API keys and all other credentials must exist in only one secure location, which is AWS Secrets Manager.
+They must not be stored in:
+- Plaintext environment variables.
+- Source code.
+- Git repositories.
+I also prepared a guideline for retrieving secrets from Lambda functions and caching them at the global scope.
+This approach reduces both latency and operational cost because AWS Secrets Manager charges based on API requests. The backend member immediately applied this method to the Worker function.
+
+#### 4. Google OAuth Consent Screen — Working Outside the AWS Ecosystem
+
+This was my first time working with Google Cloud Console.
+The most important observation was the behavior of the OAuth consent screen in **Testing** mode. An application that has not completed Google's verification process only allows accounts included in the Test users list to authenticate, with a maximum of 100 test users.
+The Gmail read scope belongs to the sensitive or restricted scope category.
+Making the application publicly available would require a demanding verification process, including:
+- A publicly accessible privacy policy.
+- A demonstration video.
+- Potential business verification.
+This process was not suitable for the scope of an academic project.
+Therefore, the team decided to keep the consent screen in Testing mode and clearly document this limitation in the Limitations section of the report instead of allowing evaluators to discover it independently.
+
+### Week 10 Evaluation:
+
+- The Cognito authentication layer was fully configured, verified through the AWS CLI, and handed over to the Flutter member with all required integration information.
+- The IAM Role was designed based on careful permission analysis, and the related security trade-offs were documented for use during the project defense.
+- Secrets Manager was successfully configured, together with a unified credential-management policy for the entire team.
+- The Google Cloud project was prepared and only required the actual backend callback URL to complete the OAuth Client configuration.
+
+### Challenges Encountered:
+
+- The new Cognito Console interface had changed significantly compared with older tutorials and online documentation. Many settings had been renamed or moved, requiring me to rely on the latest official documentation.
+- Defining the permission boundaries for `execute-api:ManageConnections` was challenging because the WebSocket API had not yet been created. The permission design had to anticipate the architecture planned for the following week.
+- OAuth concepts such as client types, scopes, consent, and incremental authorization were numerous and easy to confuse, especially because Google and AWS documentation sometimes used slightly different terminology for similar concepts.
+
+### Solutions and Best Practices Learned:
+
+- Always follow the latest official documentation instead of relying on outdated blog posts or tutorials, especially for cloud consoles whose interfaces change frequently.
+- Record every security trade-off at the time the decision is made, such as shared roles versus individual roles or Testing mode versus Production consent. Each decision should include a clear justification to ensure transparency in the report and prepare the team for defense questions.
+- Draw the OAuth flow on paper before configuring any settings in the cloud console. Abstract concepts become much easier to understand when the path of each token is visually represented.
+
+### Direction for the Following Week:
+
+- Develop the two OAuth Lambda functions, including the initialization function and callback function, as well as a shared Lambda Layer for refresh-token handling. This will be the most technically demanding part of my assigned responsibilities.
+- Solve the problem of preserving the user’s identity throughout Google’s redirect flow by using the `state` parameter.
+- Coordinate with the backend member to add the actual callback URL to the Google OAuth Client configuration.

@@ -1,20 +1,37 @@
 ---
-title : "Truy cập S3 từ môi trường truyền thống"
-date : 2024-01-01 
-weight : 4 
-chapter : false
-pre : " <b> 5.4. </b> "
+title: "Tích hợp OAuth Gmail"
+date: 2026-07-08
+weight: 4
+chapter: false
+pre: " <b> 5.4. </b> "
 ---
 
-#### Tổng quan
+#### Vì sao cần một mục riêng cho OAuth Gmail
 
-+ Trong phần này, bạn sẽ tạo một Interface Endpoint để truy cập Amazon S3 từ môi trường truyền thống mô phỏng. Interface Endpoint sẽ cho phép bạn định tuyến đến Amazon S3 qua kết nối VPN từ môi trường truyền thống mô phỏng của bạn.
+OAuth Gmail là phần nhiều công đoạn nhất của dự án và thường bị bỏ qua vì không nằm trên diagram kiến trúc chính. Tuy nhiên nếu thiếu phần này, Lambda Worker sẽ luôn thất bại vì không có Gmail access token để đọc hộp thư của người dùng.
 
-+ Tại sao nên sử dụng **Interface Endpoint**:
-    + Các Gateway endpoints chỉ hoạt động với các tài nguyên đang chạy trong VPC nơi chúng được tạo. Interface Endpoint  hoạt động với tài nguyên chạy trong VPC và cả tài nguyên chạy trong môi trường truyền thống. Khả năng kết nối từ môi trường truyền thống của bạn với aws cloud có thể được cung cấp bởi AWS Site-to-Site VPN hoặc AWS Direct Connect.
-    + Interface Endpoint cho phép bạn kết nối với các dịch vụ do AWS PrivateLink cung cấp. Các dịch vụ này bao gồm một số dịch vụ AWS, dịch vụ do các đối tác và khách hàng AWS lưu trữ trong VPC của riêng họ (gọi tắt là Dịch vụ PrivateLink endpoints) và các dịch vụ Đối tác AWS Marketplace. Đối với workshop này, chúng ta sẽ tập trung vào việc kết nối với Amazon S3.
-    
-![Interface endpoint architecture](/images/5-Workshop/5.4-S3-onprem/diagram3.png)
+Luồng OAuth đầy đủ của InboxIQ:
 
+```
+User bấm "Connect Gmail" trên app
+  → App gọi REST /auth/gmail/init → nhận về consent URL
+  → App mở consent URL trong trình duyệt
+  → User đăng nhập và cấp quyền trên Google
+  → Google redirect về callback URL kèm authorization code
+  → Lambda callback đổi code lấy access_token + refresh_token
+  → Lambda lưu token vào DynamoDB (bảng inboxiq-gmail-connections)
+  → Trang callback hiển thị "Kết nối Gmail thành công"
+```
 
+Điểm mấu chốt của thiết kế: endpoint `/auth/gmail/init` **bắt buộc** xác thực Cognito (chỉ user đã đăng nhập mới khởi tạo được kết nối), trong khi endpoint `/auth/gmail/callback` **không** xác thực — vì request tới từ Google redirect qua trình duyệt, không mang JWT. Danh tính người dùng được truyền xuyên suốt vòng redirect thông qua tham số `state`.
 
+#### Nội dung
+
+{{% children /%}}
+
+#### Kết quả đạt được sau mục này
+
+- Google Cloud project với Gmail API và OAuth consent screen được cấu hình đúng scope tối thiểu (`gmail.readonly`, `userinfo.email`)
+- Hai Lambda function mới (`inboxiq-oauth-init`, `inboxiq-oauth-callback`) và một Lambda Layer dùng chung (`GmailSharedLayer`) cho logic refresh token
+- Luồng OAuth chạy end-to-end với tài khoản Gmail thật, token được lưu và tự động refresh
+- Toàn bộ pipeline Cognito → REST API → SQS → Worker → Gmail API → GPT-4o-mini → DynamoDB được kiểm chứng với email thật

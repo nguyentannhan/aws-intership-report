@@ -1,40 +1,77 @@
 ---
-title : "Create a gateway endpoint"
-date : 2024-01-01 
-weight : 1
-chapter : false
-pre : " <b> 5.3.1 </b> "
+title: "Producer Lambda"
+date: 2026-07-07
+weight: 1
+chapter: false
+pre: " <b> 5.3.1. </b> "
 ---
 
-1. Open the [Amazon VPC console](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#Home:)
-2. In the navigation pane, choose **Endpoints**, then click **Create Endpoint**:
+## Role
 
-{{% notice note %}}
-You will see **6 existing VPC endpoints** that support **AWS Systems Manager (SSM)**. These endpoints were deployed automatically by the **CloudFormation Templates** for this workshop.
-{{% /notice %}}
+Receives REST requests from the client (including the JWT already verified by the Cognito Authorizer), packages the message, pushes it to the SQS Main Queue, and immediately returns `202 Accepted` — without waiting for the Worker to finish processing.
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/endpoints.png)
+## Main Code (`src/producer/index.mjs`)
 
-3. In the Create endpoint console:
-+ Specify name of the endpoint: ```s3-gwe```
-+ In service category, choose **AWS services**
+```javascript
+export const handler = async (event) => {
+  const userId = event.requestContext.authorizer.claims.sub;
+  const body = JSON.parse(event.body || "{}");
+  const { connectionId, action = "check-gmail" } = body;
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/create-s3-gwe1.png)
+  const message = {
+    jobId: `job-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    userId, connectionId, action,
+    requestedAt: new Date().toISOString()
+  };
 
-+ In **Services**, type ```s3``` in the search box and choose the service with type **gateway**
+  await sqs.send(new SendMessageCommand({
+    QueueUrl: QUEUE_URL,
+    MessageBody: JSON.stringify(message)
+  }));
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/services.png)
+  return {
+    statusCode: 202,
+    body: JSON.stringify({ message: "Processing started", jobId: message.jobId })
+  };
+};
 
-+ For VPC, select **VPC Cloud** from the drop-down.
-+ For **Configure route tables**, select the route table that is already associated with **two subnets** (note: this is not the main route table for the VPC, but a second route table created by CloudFormation).
+```
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/vpc.png)
+`userId` is retrieved directly from `event.requestContext.authorizer.claims.sub` — API Gateway automatically verifies the JWT via the Cognito Authorizer before this Lambda is invoked, so there is no need to manually verify the token in the code.
 
-+ **For Policy**, leave the default option, **Full Access**, to allow full access to the service. You will deploy **a VPC endpoint policy** in a later lab module to demonstrate restricting access to **S3 buckets** based on policies.
+## SAM Template — expose as a REST endpoint
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/policy.png)
+```yaml
+ProducerFunction:
+  Type: AWS::Serverless::Function
+  Properties:
+    FunctionName: inboxiq-producer
+    CodeUri: src/producer/
+    Handler: index.handler
+    Timeout: 10
+    Role: !Ref LambdaRoleArn
+    Environment:
+      Variables:
+        SQS_QUEUE_URL: !Ref MainQueueUrl
+    Events:
+      CheckGmail:
+        Type: Api
+        Properties:
+          RestApiId: !Ref RestApi
+          Path: /check-gmail
+          Method: POST
 
-+ Do not add a tag to the VPC endpoint at this time.
-+ Click **Create endpoint**, then click x after receiving a successful creation message.
+```
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/complete.png)
+> **Correction from code review:** The initial version had 2 duplicate resources (`ProducerFunction` without attached Events + `CheckGmailApiEvent` that actually received the request) — they have been merged into a single resource as shown above to avoid dead code in the template.
+
+## Deployment Results
+
+REST API endpoint: `https://rjc76njhya.execute-api.us-east-1.amazonaws.com/prod`
+
+Tested using `curl.exe` with a real JWT token (retrieved via `aws cognito-idp initiate-auth`), correctly returning `202 Accepted`:
+
+```json
+{"message":"Processing started","jobId":"job-1783438359558-mq2qy4"}
+```
+![Test Producer Complete](images/5-Workshop/5.3-Backend-serverless/producer-test-202.jpg)

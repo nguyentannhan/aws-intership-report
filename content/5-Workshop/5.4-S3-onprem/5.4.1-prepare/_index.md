@@ -1,57 +1,107 @@
 ---
-title : "Prepare the environment"
-date : 2024-01-01
-weight : 1
-chapter : false
-pre : " <b> 5.4.1 </b> "
+title: "Google Cloud Configuration"
+date: 2026-07-08
+weight: 1
+chapter: false
+pre: " <b> 5.4.1. </b> "
 ---
 
-To prepare for this part of the workshop you will need to:
-+ Deploying a CloudFormation stack 
-+ Modifying a VPC route table. 
+#### 1. Create a project and enable the Gmail API
 
-These components work together to simulate on-premises DNS forwarding and name resolution.
+Access [Google Cloud Console](https://console.cloud.google.com/), click **Select a project** on the toolbar → **New Project** in the pop-up dialog.
 
-#### Deploy the CloudFormation stack
+- Project name: `InboxIQ`
+- Parent resource: **No organization** (personal account)
 
-The CloudFormation template will create additional services to support an on-premises simulation:
-+ One Route 53 Private Hosted Zone that hosts Alias records for the PrivateLink S3 endpoint
-+ One Route 53 Inbound Resolver endpoint that enables "VPC Cloud" to resolve inbound DNS resolution requests to the Private Hosted Zone
-+ One Route 53 Outbound Resolver endpoint that enables "VPC On-prem" to forward DNS requests for S3 to "VPC Cloud"
+{{% notice note %}}
+Google limits the number of projects per free account (default is 12). The warning "You have N projects remaining in your quota" is for informational purposes only and does not prevent project creation.
+{{% /notice %}}
 
-![route 53 diagram](/images/5-Workshop/5.4-S3-onprem/route53.png)
+![Create InboxIQ project](images/5-Workshop/5.4-Gmail-oauth/create-project.jpg)
 
-1. Click the following link to open the [AWS CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.amazonaws.com/reinvent-endpoints-builders-session/R53CF.yaml&stackName=PLOnpremSetup). The required template will be pre-loaded into the menu. Accept all default and click Create stack.
+After the project is created, click **Select Project** in the notification to switch the console to the correct project — if the account has multiple projects, it is very easy for the console to mistakenly stay on the old project, causing the subsequent steps (enabling APIs, creating credentials) to be applied to the wrong place.
 
-![Create stack](/images/5-Workshop/5.4-S3-onprem/create-stack.png)
+Next, go to **APIs & Services → Library**, search for **Gmail API** and click **Enable**. A new project does not have any APIs enabled by default; if you skip this step, all future Gmail API calls will return a `403 accessNotConfigured` error, which is very hard to trace.
 
-![Button](/images/5-Workshop/5.4-S3-onprem/create-stack-button.png)
+![Gmail API enabled](images/5-Workshop/5.4-Gmail-oauth/Gmail-api-enabled.jpg)
 
-It may take a few minutes for stack deployment to complete. You can continue with the next step without waiting for the deployemnt to finish.
+#### 2. Configure OAuth Consent Screen (Google Auth Platform)
 
-#### Update on-premise private route table
+{{% notice info %}}
+Google has merged the old "OAuth consent screen" page into a new interface called the **Google Auth Platform** with sections for Overview, Branding, Audience, Clients, and Data Access. Older guides on the internet might describe a different interface, but the essence of the steps remains unchanged.
+{{% /notice %}}
 
-This workshop uses a strongSwan VPN running on an EC2 instance to simulate connectivty between an on-premises datacenter and the AWS cloud. Most of the required components are provisioned before your start. To finalize the VPN configuration, you will modify the "VPC On-prem" routing table to direct traffic destined for the cloud to the strongSwan VPN instance.
+Go to **APIs & Services → OAuth consent screen** (redirects to Google Auth Platform) → click **Get started**:
 
-1. Open the Amazon EC2 console 
+1. **App name**: `InboxIQ`, **User support email**: your email
+2. **Audience**: select **External** — the Internal option is only for Google Workspace organizations; personal accounts must select External.
+3. **Contact Information**: developer email
+4. Agree to the terms → **Create**
 
-2. Select the instance named infra-vpngw-test. From the Details tab, copy the Instance ID and paste this into your text editor
+After creation, continue configuring two sections on the sidebar:
 
-![ec2 id](/images/5-Workshop/5.4-S3-onprem/ec2-onprem-id.png)
+**Data Access** → **Add or Remove Scopes** → select exactly 2 scopes:
 
-3. Navigate to the VPC menu by using the Search box at the top of the browser window.
+| Scope | Purpose |
+|---|---|
+| `.../auth/gmail.readonly` | Read emails for summarization (restricted scope) |
+| `.../auth/userinfo.email` | Retrieve user's Gmail address for display |
 
-4. Click on Route Tables, select the RT Private On-prem route table, select the Routes tab, and click Edit Routes.
+Principle of least-privilege: only request read access, not send/delete/modify access. The fewer scopes you request, the less intimidating the consent screen is for users, and the easier it is for the app to pass Google's verification process later.
 
-![rt](/images/5-Workshop/5.4-S3-onprem/rt.png)
+![Configured scopes](images/5-Workshop/5.4-Gmail-oauth/oauth-scopes.jpg)
 
-5. Click Add route.
-+ Destination: your Cloud VPC cidr range
-+ Target: ID of your infra-vpngw-test instance (you saved in your editor at step 1)
+**Audience** → **Test users** → **Add users** → add the Google email that will be used for testing.
 
-![add route](/images/5-Workshop/5.4-S3-onprem/add-route.png)
+{{% notice warning %}}
+The app is in **Testing** mode (not yet verified by Google), so only emails in the Test users list can grant access. Forgetting this step will result in an `access_denied` error when testing the OAuth flow.
+{{% /notice %}}
 
-6. Click Save changes
+#### 3. Create OAuth Client ID
 
+Go to the **Clients** section → **Create Client**:
 
+- **Application type**: **Web application** — even though the final client is a Flutter app, the receiver of the callback from Google is the API Gateway (a web endpoint).
+- **Name**: `InboxIQ Backend Callback`
+- **Authorized redirect URIs**: enter the exact REST API callback endpoint:
 
+```
+https://[.execute-api.us-east-1.amazonaws.com/prod/auth/gmail/callback](https://www.google.com/search?q=https://.execute-api.us-east-1.amazonaws.com/prod/auth/gmail/callback)
+```
+{{% notice tip %}}
+Two practical notes: (1) Do not confuse this with the **Authorized JavaScript origins** box — that box only accepts the root domain, entering a URL with a path will report "Invalid Origin"; the full redirect URI must be entered in the **Authorized redirect URIs** box. (2) It does not matter if the callback endpoint does not exist at this time — Google only matches the URL string and does not check if the URL responds.
+{{% /notice %}}
+
+After clicking **Create**, Google displays the **Client ID** (format `xxxxx.apps.googleusercontent.com`) and **Client Secret** (format `GOCSPX-xxxxx`). Save these two values immediately — the Client Secret cannot be viewed again after closing the dialog.
+
+![OAuth Client created](images/5-Workshop/5.4-Gmail-oauth/oauth-client-created.jpg)
+
+#### 4. Save credentials to Secrets Manager
+
+Similar to the OpenAI key in the backend section, Google OAuth credentials are stored centrally in Secrets Manager instead of being hard-coded or using environment variables. In PowerShell, write the JSON to a file first to prevent PowerShell from swallowing the double quotes:
+
+```powershell
+@'
+{
+  "clientId": "xxxxx.apps.googleusercontent.com",
+  "clientSecret": "GOCSPX-xxxxx"
+}
+'@ | Out-File -FilePath D:\google-oauth-secret.json -Encoding ascii
+
+aws secretsmanager create-secret `
+  --name "inboxiq/google-oauth" `
+  --description "Google OAuth credentials for Gmail integration" `
+  --secret-string file://D:/google-oauth-secret.json `
+  --region us-east-1
+
+Remove-Item D:\google-oauth-secret.json
+
+```
+
+{{% notice note %}}
+Use `-Encoding ascii` instead of `utf8` because PowerShell automatically inserts a BOM at the beginning of a UTF-8 file by default, causing the AWS CLI to fail when parsing the JSON. Delete the temporary file immediately after creating the secret because it contains the Client Secret in plain text. Regarding costs: each secret in Secrets Manager costs about $0.40/month.
+{{% /notice %}}
+
+Result: Secrets Manager has 2 secrets — `inboxiq/openai-api-key` and `inboxiq/google-oauth`.
+
+![Two secret in Secrets Manager](images/5-Workshop/5.4-Gmail-oauth/secrets-manager.jpg)
