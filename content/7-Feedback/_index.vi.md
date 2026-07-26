@@ -27,8 +27,6 @@ Văn hóa công ty rất tích cực: mọi người tôn trọng lẫn nhau, l�
 **6. Chính sách / phúc lợi cho thực tập sinh**  
 Công ty có hỗ trợ phụ cấp thực tập và tạo điều kiện về thời gian linh hoạt khi cần thiết. Ngoài ra, việc được tham gia các buổi đào tạo nội bộ là một điểm cộng lớn.
 
----
-
 ### Một số câu hỏi khác
 - Điều bạn **hài lòng nhất** trong thời gian thực tập?  Điều em hài lòng nhất trong quá trình thực tập là được tiếp cận với môi trường làm việc chuyên nghiệp và có cơ hội tham gia vào các công việc thực tế liên quan đến lĩnh vực công nghệ thông tin. Trong suốt thời gian thực tập, em đã nhận được sự hỗ trợ và hướng dẫn tận tình từ các anh/chị trong công ty, giúp em hiểu rõ hơn về quy trình làm việc trong doanh nghiệp, đồng thời củng cố và vận dụng các kiến thức đã được học tại trường vào thực tiễn. Đây là cơ hội quý báu giúp em nâng cao năng lực chuyên môn cũng như phát triển các kỹ năng mềm cần thiết cho công việc trong tương lai.
 

@@ -12,20 +12,20 @@ In terms of work ethic, I always strived to complete tasks well, complied with w
 
 To objectively reflect on my internship period, I would like to evaluate myself based on the following criteria:
 
-| No. | Criteria                            | Description                                                                                      | Good | Fair | Average |
-| --- | ----------------------------------- | ------------------------------------------------------------------------------------------------ | ---- | ---- | ------- |
-| 1   | **Professional knowledge & skills** | Understanding of the field, applying knowledge in practice, proficiency with tools, work quality | ☐  | ✅   | ☐       |
-| 2   | **Ability to learn**                | Ability to absorb new knowledge and learn quickly                                                | ☐    | ✅   | ☐       |
-| 3   | **Proactiveness**                   | Taking initiative, seeking out tasks without waiting for instructions                            | ✅   | ☐    | ☐       |
-| 4   | **Sense of responsibility**         | Completing tasks on time and ensuring quality                                                    | ✅   | ☐    | ☐       |
-| 5   | **Discipline**                      | Adhering to schedules, rules, and work processes                                                 | ✅   | ☐    | ☐       |
-| 6   | **Progressive mindset**             | Willingness to receive feedback and improve oneself                                              | ☐    | ✅   | ☐       |
-| 7   | **Communication**                   | Presenting ideas and reporting work clearly                                                      | ☐    | ✅   | ☐       |
-| 8   | **Teamwork**                        | Working effectively with colleagues and participating in teams                                   | ✅   | ☐    | ☐       |
-| 9   | **Professional conduct**            | Respecting colleagues, partners, and the work environment                                        | ✅   | ☐    | ☐       |
-| 10  | **Problem-solving skills**          | Identifying problems, proposing solutions, and showing creativity                                | ☐    | ✅   | ☐       |
-| 11  | **Contribution to project/team**    | Work effectiveness, innovative ideas, recognition from the team                                  | ✅   | ☐    | ☐       |
-| 12  | **Overall**                         | General evaluation of the entire internship period                                               | ✅   | ☐    | ☐       |
+| No. | Criteria                              | Description                                                                                          | Good | Fair | Average |
+|----:|---------------------------------------|------------------------------------------------------------------------------------------------------|:----:|:----:|:-------:|
+| 1   | **Professional Knowledge and Skills** | Ability to apply learned knowledge, use relevant tools, and complete professional tasks             | ☐    | ✅   | ☐       |
+| 2   | **Learning Ability**                  | Actively learns new knowledge and follows guidance during the working process                       | ☐    | ✅   | ☐       |
+| 3   | **Initiative**                        | Independently searches for information, suggests solutions, and does not rely entirely on guidance  | ✅   | ☐    | ☐       |
+| 4   | **Sense of Responsibility**           | Completes assigned tasks and takes responsibility for the quality of work                           | ✅   | ☐    | ☐       |
+| 5   | **Discipline**                        | Follows working hours, regulations, and procedures throughout the internship                        | ☐    | ✅   | ☐       |
+| 6   | **Willingness to Improve**            | Accepts feedback, recognizes weaknesses, and adjusts working methods                                | ✅   | ☐    | ☐       |
+| 7   | **Communication Skills**              | Communicates and presents ideas clearly, although confidence still needs improvement                | ☐    | ✅   | ☐       |
+| 8   | **Teamwork Skills**                   | Cooperates, shares information, and supports team members during the project                        | ✅   | ☐    | ☐       |
+| 9   | **Professional Attitude**             | Maintains a serious attitude and respects supervisors and team members                              | ✅   | ☐    | ☐       |
+| 10  | **Problem-Solving Skills**            | Identifies and handles problems but needs to improve analysis and solution selection                | ☐    | ✅   | ☐       |
+| 11  | **Contribution to the Project**       | Completes assigned work and contributes to the overall results of the project                       | ✅   | ☐    | ☐       |
+| 12  | **Overall Evaluation**                | Completes the internship relatively well and achieves the planned learning objectives               | ☐    | ✅   | ☐       |
 
 ### Needs Improvement
 

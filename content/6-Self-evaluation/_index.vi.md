@@ -12,20 +12,20 @@ Về tác phong, tôi luôn cố gắng hoàn thành tốt nhiệm vụ, tuân t
 
 Để phản ánh một cách khách quan quá trình thực tập, tôi xin tự đánh giá bản thân dựa trên các tiêu chí dưới đây:
 
-| STT | Tiêu chí                            | Mô tả                                                                                            | Tốt | Khá | Trung bình |
-| --- | ----------------------------------- | ------------------------------------------------------------------------------------------------ | --- | --- | ---------- |
-| 1   | **Kiến thức và kỹ năng chuyên môn** | Hiểu biết về ngành, áp dụng kiến thức vào thực tế, kỹ năng sử dụng công cụ, chất lượng công việc | ☐  | ✅   | ☐          |
-| 2   | **Khả năng học hỏi**                | Tiếp thu kiến thức mới, học hỏi nhanh                                                            | ☐   | ✅  | ☐          |
-| 3   | **Chủ động**                        | Tự tìm hiểu, nhận nhiệm vụ mà không chờ chỉ dẫn                                                  | ✅  | ☐   | ☐          |
-| 4   | **Tinh thần trách nhiệm**           | Hoàn thành công việc đúng hạn, đảm bảo chất lượng                                                | ✅  | ☐   | ☐          |
-| 5   | **Kỷ luật**                         | Tuân thủ giờ giấc, nội quy, quy trình làm việc                                                   | ✅  | ☐   | ☐          |
-| 6   | **Tính cầu tiến**                   | Sẵn sàng nhận feedback và cải thiện bản thân                                                     | ☐   | ✅  | ☐          |
-| 7   | **Giao tiếp**                       | Trình bày ý tưởng, báo cáo công việc rõ ràng                                                     | ☐   | ✅  | ☐          |
-| 8   | **Hợp tác nhóm**                    | Làm việc hiệu quả với đồng nghiệp, tham gia nhóm                                                 | ✅  | ☐   | ☐          |
-| 9   | **Ứng xử chuyên nghiệp**            | Tôn trọng đồng nghiệp, đối tác, môi trường làm việc                                              | ✅  | ☐   | ☐          |
-| 10  | **Tư duy giải quyết vấn đề**        | Nhận diện vấn đề, đề xuất giải pháp, sáng tạo                                                    | ☐   | ✅  | ☐          |
-| 11  | **Đóng góp vào dự án/tổ chức**      | Hiệu quả công việc, sáng kiến cải tiến, ghi nhận từ team                                         | ✅  | ☐   | ☐          |
-| 12  | **Tổng thể**                        | Đánh giá chung về toàn bộ quá trình thực tập                                                     | ✅  | ☐   | ☐          |
+| STT | Tiêu chí                            | Nội dung đánh giá                                                                                   | Tốt | Khá | Trung bình |
+|-----|-------------------------------------|-----------------------------------------------------------------------------------------------------|:---:|:---:|:----------:|
+| 1   | **Kiến thức và kỹ năng chuyên môn** | Vận dụng kiến thức đã học, sử dụng công cụ và thực hiện các nhiệm vụ chuyên môn                     | ☐   | ✅  | ☐          |
+| 2   | **Khả năng tiếp thu**               | Chủ động học kiến thức mới và tiếp nhận hướng dẫn trong quá trình làm việc                          | ☐   | ✅  | ☐          |
+| 3   | **Tính chủ động**                   | Tự tìm hiểu tài liệu, đề xuất hướng thực hiện và không phụ thuộc hoàn toàn vào sự hướng dẫn         | ✅  | ☐   | ☐          |
+| 4   | **Tinh thần trách nhiệm**           | Hoàn thành nhiệm vụ được giao và chịu trách nhiệm với kết quả công việc                             | ✅  | ☐   | ☐          |
+| 5   | **Ý thức kỷ luật**                  | Tuân thủ giờ giấc, quy định và quy trình làm việc trong suốt quá trình thực tập                     | ☐   | ✅  | ☐          |
+| 6   | **Tinh thần cầu tiến**              | Sẵn sàng tiếp nhận góp ý, nhận ra hạn chế và điều chỉnh phương pháp làm việc                        | ✅  | ☐   | ☐          |
+| 7   | **Kỹ năng giao tiếp**               | Có khả năng trao đổi và trình bày ý kiến, tuy nhiên đôi lúc còn thiếu tự tin                        | ☐   | ✅  | ☐          |
+| 8   | **Khả năng làm việc nhóm**          | Phối hợp, chia sẻ thông tin và hỗ trợ các thành viên trong quá trình thực hiện dự án                | ✅  | ☐   | ☐          |
+| 9   | **Thái độ chuyên nghiệp**           | Giữ thái độ nghiêm túc, tôn trọng người hướng dẫn và các thành viên trong môi trường làm việc       | ✅  | ☐   | ☐          |
+| 10  | **Khả năng giải quyết vấn đề**      | Nhận diện và xử lý một số vấn đề, nhưng cần cải thiện khả năng phân tích và lựa chọn giải pháp      | ☐   | ✅  | ☐          |
+| 11  | **Mức độ đóng góp**                 | Hoàn thành phần công việc được phân công và đóng góp vào kết quả chung của dự án                    | ✅  | ☐   | ☐          |
+| 12  | **Đánh giá chung**                  | Hoàn thành tương đối tốt quá trình thực tập và đạt được các mục tiêu đã đề ra                       | ☐   | ✅  | ☐          |
 
 ### Cần cải thiện
 

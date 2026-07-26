@@ -29,8 +29,6 @@ The company culture is very positive: everyone respects each other, works seriou
 **6. Internship Policies / Benefits**  
 The company provides an internship allowance and offers flexible working hours when needed. In addition, having the opportunity to join internal training sessions is a big plus.
 
----
-
 ### Additional Questions
 
 - What are you **most satisfied with** during your internship?
